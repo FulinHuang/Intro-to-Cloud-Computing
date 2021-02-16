@@ -1,6 +1,1 @@
-*.dylib filter=lfs diff=lfs merge=lfs -text
-*.0.dylib filter=lfs diff=lfs merge=lfs -text
-*.so filter=lfs diff=lfs merge=lfs -text
-/venv/lib/python3.6/site-packages/torch/lib/ filter=lfs diff=lfs merge=lfs -text
-/venv/lib/python3.6/site-packages/torch/lib/libtorch_cpu.dylib filter=lfs diff=lfs merge=lfs -text
 * !text !filter !merge !diff
