@@ -4,7 +4,6 @@ from app import app
 import mysql.connector
 
 @app.route('/upload',methods=['GET'])
-# Display an HTML list of all product.
 def upload_fake():
 
     cnx = mysql.connector.connect(user='root ',

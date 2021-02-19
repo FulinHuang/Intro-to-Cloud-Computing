@@ -2,9 +2,7 @@
 
 {% block content %}
     <h1>Hi, {{ current_user.username }}!</h1>
-    {% for post in posts %}
-    <div><p>{{ post.author.username }} 是 <b>{{ post.body }}</b></p></div>
-    {% endfor %}
+    <div><p>Welcome</b></p></div>
     {% if current_user.username =='Admin' %}
          <p>
             <a href="{{ url_for('register') }}">Register For New Account</a>
@@ -22,4 +20,35 @@
     <p>
             <a href="{{ url_for('urlupload') }}">URL File Upload</a>
     </p>
+
+    <hr>
+        <h4>Photo Upload History</h4>
+        {% for file in all_files %}
+            <img src="{{'/static/output/' + file}}" class="img-fluid" style="width: 128px">
+        {% endfor %}
+
+        <hr>
+        <h4>No Face Photos</h4>
+       {% for photo in photo_noface%}
+            <img src="{{'/static/output/' + photo}}" class="img-fluid" style="width: 128px">
+       {% endfor %}
+
+        <hr>
+        <h4>All Masked Photos</h4>
+       {% for photo in photo_allmask%}
+            <img src="{{'/static/output/' + photo}}" class="img-fluid" style="width: 128px">
+       {% endfor %}
+
+        <hr>
+        <h4>No Masked Photos</h4>
+       {% for photo in photo_nomask%}
+            <img src="{{'/static/output/' + photo}}" class="img-fluid" style="width: 128px">
+       {% endfor %}
+
+        <hr>
+        <h4>Partial Masked Photos</h4>
+       {% for photo in photo_partmask%}
+            <img src="{{'/static/output/' + photo}}" class="img-fluid" style="width: 128px">
+       {% endfor %}
+
 {% endblock %}

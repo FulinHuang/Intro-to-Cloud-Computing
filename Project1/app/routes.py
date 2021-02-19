@@ -1,4 +1,4 @@
-from flask import render_template, url_for, redirect, flash
+from flask import render_template, url_for, redirect, flash, jsonify, make_response, request
 from app import app, db
 from flask_login import login_user, logout_user, current_user, login_required
 from app.forms import LoginForm, RegistrationForm, DeleteAccountForm, URLUploadPhotoForm
@@ -10,6 +10,7 @@ from app.photo import Photo
 import uuid
 import os
 import cv2
+import re
 import urllib.request
 from FaceMaskDetection.pytorch_infer import inference
 from werkzeug.utils import secure_filename
@@ -18,14 +19,24 @@ from werkzeug.utils import secure_filename
 @app.route('/index')
 @login_required
 def index():
-    posts = [
-        {
-            'author': {'username': '您'},
-            'body': '大SB!'
-        }
-    ]
-
-    return render_template('index.html', title='Home', posts=posts)
+    all_files = []
+    photo_noface = []
+    photo_allmask = []
+    photo_nomask = []
+    photo_partmask = []
+    photo_all = Photo.query.filter_by(username=current_user.get_username()).all()
+    for photo in photo_all:
+        all_files.append(photo.photourl)
+        if photo.imagetype == 0:
+            photo_noface.append(photo.photourl)
+        elif photo.imagetype == 1:
+            photo_allmask.append(photo.photourl)
+        elif photo.imagetype == 2:
+            photo_nomask.append(photo.photourl)
+        else:
+            photo_partmask.append(photo.photourl)
+    return render_template('index.html', title='Home', all_files=all_files, photo_noface=photo_noface,
+                           photo_allmask=photo_allmask, photo_nomask=photo_nomask, photo_partmask=photo_partmask)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -50,10 +61,6 @@ def logout():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    #    if current_user.is_authenticated:
-    #        return redirect(url_for('index'))
-
-    # ONLY Admin can implement the registration
     if current_user.get_id() != '1':  # get_id for Admin is 1
         flash('Only Admin can register new account, please login first')
         return redirect(url_for('login'))
@@ -64,9 +71,51 @@ def register():
             user.set_password(form.password.data)
             db.session.add(user)
             db.session.commit()
-            flash('Congratulations, you are now a registered user!')
+            flash('Congratulations, you just registered a user!')
             return redirect(url_for('login'))
         return render_template('register.html', title='REGISTER', form=form)
+
+
+@app.route('/api/register', methods=['POST'])
+def register_test():
+    if request.method != 'POST':
+        message = "Method not allowed"
+        return jsonify({
+            "success": False,
+            "error": {
+                "code": 405,
+                "message": message
+            }
+        })
+
+    user = request.form.get('username')
+    password = request.form.get('password')
+    print(user)
+    print(password)
+    if len(user) == 0 or len(password) == 0:
+        return jsonify({
+            "success": False,
+            "error": {"code": 400,
+                      "message": "At least one field is empty!"
+                      }
+            }
+        )
+    username = User.query.filter_by(username=user).first()
+    if username:
+        return jsonify({
+            "success": False,
+            "error": {"code": 400,
+                      "message": "Username already exist!"
+                      }
+        }
+    )
+
+    user = User(username=user)
+    user.set_password(password)
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({"success": True})
+
 
 
 @app.route('/reset_password_request', methods=['GET', 'POST'])
@@ -117,55 +166,164 @@ def main():
     return render_template("main.html")
 
 
+@app.route('/index', methods=['POST'])
+def upload():
+    uploaded_file = request.files['file']
+    filename = secure_filename(uploaded_file.filename)
+    file_ext = os.path.splitext(filename)[1]
+    filename = str(uuid.uuid4()) + file_ext
+    if uploaded_file.filename != '':
+        if file_ext not in app.config['UPLOAD_EXTENSIONS']:
+            flash('Please choose a photo with correct format!')
+            return redirect(url_for('index'))
+        uploaded_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        flash('Success!')
+    else:
+        flash('Please select a file!')
+        return redirect(url_for('index'))
+
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    num_face, num_mask, num_unmask = mask_detection(filepath, filename)
+
+    flash('In this photo, we have detected {} faces: {} with masks on while {} without masks faces on.'.format(num_face,num_mask,num_unmask))
+
+    return redirect(url_for('index'))
+
+
 @app.route('/urlupload', methods=['GET', 'POST'])
 def urlupload():
     form = URLUploadPhotoForm()
     if form.validate_on_submit():
         photourl = form.photoURL.data
-        print(photourl)
         filename = photourl.split('/')[-1]
         filename = secure_filename(filename)
-        filename = str(uuid.uuid4()) + filename
+        file_ext = os.path.splitext(filename)[1]
+        filename = str(uuid.uuid4()) + file_ext
         unique_file = filename
         if filename != '':
-            file_ext = os.path.splitext(filename)[1]
             if file_ext in app.config['UPLOAD_EXTENSIONS']:
                 opener = urllib.request.URLopener()
-                filename, headers = opener.retrieve(photourl, os.path.join('app/static/image', filename))
-                flash('Successfully Submit!')
+                filename, headers = opener.retrieve(photourl, os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                flash('Success!')
 
-                img = cv2.imread(filename)
-                img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-                output_info, output_image = inference(img, show_result=False, target_shape=(360, 360))
-                output_image.save(os.path.join('app/static/output', unique_file), 'JPEG')
+                num_face, num_mask, num_unmask = mask_detection(filename, unique_file)
 
-                num_face = 0
-                num_mask = 0
-                num_unmask = 0
-                image_type = 0
-
-## -------------COMMENTED OUT for now until MaskDetection is done
-
-#        num_face = len(output_info)
-#        for i in range(num_face):
-#            if output_info[i][0] == 0:
-#                num_mask += 1
-#            else:
-#                num_unmask += 1
-#        if num_face == 0:
-#            image_type = 0  # no face
-#        elif num_face == num_mask:
-#            image_type = 1  # all masked
-#        elif num_face == num_unmask:
-#            image_type = 2  # all unmasked
-#        else:
-#            image_type = 3  # some masked
-
-## ------------------------------
-
-        u = Photo(username=current_user.username, photourl=filename, imagetype=image_type)
-        db.session.add(u)
-        db.session.commit()
-        flash('There are {} faces been detected, {} mask faces been detected, {} unmasked faces been detected.'.format(num_face, num_mask, num_unmask))
-        return redirect(url_for('index'))
+                flash('In this photo, we have detected {} faces: {} with masks on while {} without masks faces on.'.format(num_face, num_mask, num_unmask))
+                return redirect(url_for('index'))
+            flash('Please submit a photo with correct format!')
+        else:
+            flash('Empty file!')
     return render_template('urlupload.html', form=form)
+
+
+@app.route('/api/upload', methods=['POST'])
+def upload_test():
+    if request.method != 'POST':
+        message = "Method not allowed"
+        return jsonify({
+            "success": False,
+            "error": {
+                "code": 405,
+                "message": message
+            }
+        })
+
+    user = request.form.get('username')
+    password = request.form.get('password')
+    user = User.query.filter_by(username=user).first()
+    if user is None or not user.check_password(password):
+        message = "Invalid username or password!"
+        return jsonify({
+            "success": False,
+            "error": {
+                "code": 400,
+                "message": message
+            }
+        })
+
+    login_user(user)
+    if 'file' not in request.files:
+        message = "No file selected!"
+        return jsonify({
+            "success": False,
+            "error": {
+                "code": 400,
+                "message": message
+            }
+        })
+
+
+    file = request.files['file']
+    filename = secure_filename(file.filename)
+    file_ext = os.path.splitext(filename)[1]
+    filename = str(uuid.uuid4()) + file_ext
+    if filename == '':
+        message = "No file selected!"
+        return jsonify({
+            "success": False,
+            "error": {
+                "code": 400,
+                "message": message
+            }
+        })
+
+    if filename:
+        if file_ext not in app.config['UPLOAD_EXTENSIONS']:
+            message = "File type not supported!"
+            return jsonify({
+                "success": False,
+                "error": {
+                    "code": 400,
+                    "message": message
+                }
+            })
+
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(filepath)
+        num_face, num_mask, num_unmask = mask_detection(filepath, filename)
+        return jsonify(
+            {
+                "success": True,
+                "payload": {
+                    "num_faces": num_face,
+                    "num_masked": num_mask,
+                    "num_unmasked": num_unmask
+                }
+        })
+
+
+def mask_detection(filename, unique_file):
+    img = cv2.imread(filename)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    output_info, output_image = inference(img, show_result=False, target_shape=(360, 360))
+    output_image.save(os.path.join(app.config['OUTPUT_FOLDER'], unique_file), 'JPEG')
+
+    num_mask = 0
+    num_unmask = 0
+    num_face = len(output_info)
+
+    for i in range(num_face):
+        if output_info[i][0] == 0:
+            num_mask += 1
+        else:
+            num_unmask += 1
+    if num_face == 0:
+        image_type = 0
+    elif num_face == num_mask:
+        image_type = 1
+    elif num_face == num_unmask:
+        image_type = 2
+    else:
+        image_type = 3
+
+
+    u = Photo(username=current_user.username, photourl=unique_file, imagetype=image_type)
+
+    db.session.add(u)
+    db.session.commit()
+
+    return num_face, num_mask, num_unmask
+
+
+
+
