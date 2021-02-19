@@ -10,7 +10,6 @@ from app.photo import Photo
 import uuid
 import os
 import cv2
-import re
 import urllib.request
 from FaceMaskDetection.pytorch_infer import inference
 from werkzeug.utils import secure_filename
@@ -90,8 +89,6 @@ def register_test():
 
     user = request.form.get('username')
     password = request.form.get('password')
-    print(user)
-    print(password)
     if len(user) == 0 or len(password) == 0:
         return jsonify({
             "success": False,
@@ -115,7 +112,6 @@ def register_test():
     db.session.add(user)
     db.session.commit()
     return jsonify({"success": True})
-
 
 
 @app.route('/reset_password_request', methods=['GET', 'POST'])

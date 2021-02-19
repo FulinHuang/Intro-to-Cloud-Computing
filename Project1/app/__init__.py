@@ -14,7 +14,6 @@ login.login_view = 'login'
 mail = Mail(app)
 
 from app import routes
-from app import upload
 from app import model
 from app import forms
 from app import photo
