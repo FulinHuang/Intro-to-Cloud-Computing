@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <style>
+    table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    }
+    </style>
     <h1>Delete Account</h1>
     <form action="" method="post">
         {{ form.hidden_tag() }}
@@ -11,13 +17,22 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>
-            {{ form.email.label }}<br>
-            {{ form.email(size=64) }}<br>
-            {% for error in form.email.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
         <p>{{ form.submit() }}</p>
     </form>
+    <hr style="height:3px;border:none;color:#333;background-color:#333;" />
+    <table />
+    <thead>
+           <th>Username</th>
+           <th>Email Address</th>
+           <th>Photo Uploaded</th>
+    </thead>
+    {% for user in user_list %}
+        <tr>
+            <td>{{ user[0] }}</td>
+            <td>{{ user[1] }}</td>
+            <td>{{ user[2] }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
 {% endblock %}

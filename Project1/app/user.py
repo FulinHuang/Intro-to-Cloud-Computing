@@ -23,6 +23,9 @@ class User(UserMixin, db.Model):
     def get_username(self):
         return (self.username)
 
+    def get_email(self):
+        return (self.email)
+
     def get_reset_password_token(self, expires_in=600):
         return jwt.encode(
             {'reset_password': self.id, 'exp': time() + expires_in},
