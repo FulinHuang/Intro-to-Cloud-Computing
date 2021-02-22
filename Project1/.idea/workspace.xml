@@ -2,36 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f697c034-3f57-4aae-a5c2-232b8adb7cb2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/templates/change_password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Project1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Project1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/email.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/email.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/photo.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/photo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/image/26ea0fbc-fff8-4ccd-a6d3-25d79e7fbfb0.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/image/60ed0f21-e352-4537-bd84-43a83803e2a1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/image/7c299844-8509-4668-97b1-24106669db75.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/image/82ea8580-9b2b-4845-a821-62cf4f5646cf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/image/9b9aa761-1229-4cc6-98dc-fc5158bd5071.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/image/b8e473ef-ab21-430f-8241-d2136cab0dcf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/output/26ea0fbc-fff8-4ccd-a6d3-25d79e7fbfb0.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/output/60ed0f21-e352-4537-bd84-43a83803e2a1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/output/9b9aa761-1229-4cc6-98dc-fc5158bd5071.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/output/b8e473ef-ab21-430f-8241-d2136cab0dcf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/change_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/change_password.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/delete_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/delete_account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/main.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/email/reset_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/email/reset_password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/email/reset_password.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/email/reset_password.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/urlupload.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/urlupload.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/alembic.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/env.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/script.py.mako" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -310,7 +291,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Allen_0220" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
