@@ -72,6 +72,9 @@ def change_password():
         form = ChangePasswordForm()
         if form.validate_on_submit():
             user = current_user
+            if not user.check_password(form.old_password.data):
+                flash('Your original password is incorrect')
+                return render_template('change_password.html', title='CHANGE PASSWORD', form=form)
             user.set_password(form.new_password.data)
             db.session.add(user)
             db.session.commit()
