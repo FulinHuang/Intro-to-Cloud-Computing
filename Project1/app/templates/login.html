@@ -18,15 +18,14 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
         <p>{{ form.submit() }}</p>
-        <p><strong>Admin username: Admin</strong><br>
-           <strong>Admin password: Admin</strong><br>
+        <p><i>Admin Username: admin</i><br>
+           <i>Admin Password: admin</i><br>
         </p>
         <p>
-        Forget Your Password?
-        <a href="{{ url_for('reset_password_request') }}">Click to Reset It</a>
+        Click if you forget password:
+        <a href="{{ url_for('reset_password_request') }}">Reset Your Password</a>
         </p>
     </form>
-    <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
+    <p>Click if you want to register: <a href="{{ url_for('register') }}">Register New Account</a></p>
 {% endblock %}

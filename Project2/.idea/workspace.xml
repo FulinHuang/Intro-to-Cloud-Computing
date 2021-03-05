@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="beb9d699-2eff-4f5e-9096-8f1fffb3fe2b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/0504f9bb-f3fb-4e71-aba4-f06eee0830c1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/2c21977e-f6af-43fb-8c81-698c93d663a8.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/3655471c-88eb-46df-950b-e7251d03a292.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/3b2277cc-0195-4c82-9fcb-d9e60528494b.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/4d2dc4d3-80d0-49dc-a4f2-c75d71d4b7b1.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/4e2e8646-fda5-449f-8a77-7033356dff4e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/7792dc7b-74ba-4b0e-bb4a-53cc614f82d8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/9cd7dc14-da84-4e96-8e48-fcc8c04bbf58.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/b10c774d-cc75-4204-90cd-6447d2d602a2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/d3c3fb20-fb22-418c-af41-c6a26302c532.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/fc11568a-1d81-4b4c-88f5-8a628bf03b6c.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/0504f9bb-f3fb-4e71-aba4-f06eee0830c1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/2c21977e-f6af-43fb-8c81-698c93d663a8.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/3655471c-88eb-46df-950b-e7251d03a292.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/3b2277cc-0195-4c82-9fcb-d9e60528494b.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/4d2dc4d3-80d0-49dc-a4f2-c75d71d4b7b1.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/4e2e8646-fda5-449f-8a77-7033356dff4e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/7792dc7b-74ba-4b0e-bb4a-53cc614f82d8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/9cd7dc14-da84-4e96-8e48-fcc8c04bbf58.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/b10c774d-cc75-4204-90cd-6447d2d602a2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/d3c3fb20-fb22-418c-af41-c6a26302c532.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/fc11568a-1d81-4b4c-88f5-8a628bf03b6c.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project1/app/templates/change_password.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/.idea/Project1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/.idea/Project1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/photo.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/photo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/static/image/26ea0fbc-fff8-4ccd-a6d3-25d79e7fbfb0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/static/image/60ed0f21-e352-4537-bd84-43a83803e2a1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/static/image/7c299844-8509-4668-97b1-24106669db75.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/static/image/82ea8580-9b2b-4845-a821-62cf4f5646cf.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/static/image/9b9aa761-1229-4cc6-98dc-fc5158bd5071.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/static/image/b8e473ef-ab21-430f-8241-d2136cab0dcf.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/static/output/26ea0fbc-fff8-4ccd-a6d3-25d79e7fbfb0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/static/output/60ed0f21-e352-4537-bd84-43a83803e2a1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/static/output/9b9aa761-1229-4cc6-98dc-fc5158bd5071.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/static/output/b8e473ef-ab21-430f-8241-d2136cab0dcf.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/templates/delete_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/templates/delete_account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/templates/main.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/app/templates/urlupload.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/templates/urlupload.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/migrations/README" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/migrations/alembic.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/migrations/env.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project1/migrations/script.py.mako" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1488573748">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1280" />
+    <option name="height" value="722" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Project2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Project2" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="beb9d699-2eff-4f5e-9096-8f1fffb3fe2b" name="Default Changelist" comment="" />
+      <created>1614968347848</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1614968347848</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1280" height="722" extended-state="0" />
+    <layout>
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Python Console" />
+      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.32857144" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32857144" />
+      <window_info anchor="right" id="SciView" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+</project>

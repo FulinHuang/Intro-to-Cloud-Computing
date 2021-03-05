@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Hi, {{ current_user.username }}!</h1>
-    <div><p>Welcome</b></p></div>
-    {% if current_user.username =='Admin' %}
+    <h1>Hello, {{ current_user.username }}!</h1>
+    <div><p>Welcome!</b></p></div>
+    <div><p>{{ date_time }}</b></p></div>
+    {% if current_user.username =='admin' %}
          <p>
             <a href="{{ url_for('register') }}">Register For New Account</a>
          </p>
@@ -11,41 +12,45 @@
             <a href="{{ url_for('delete_account') }}">Delete An Account</a>
          </p>
     {% endif %}
-    <h3>Local File Upload</h3>
+    <h3>Upload Local Photo</h3>
          <form method="POST" action="" enctype="multipart/form-data">
          <p><input type="file" name="file"></p>
          <p><input type="submit" value="Submit"></p>
          </form>
-    <h3>URL File Upload</h3>
+    <h3>Upload URL Photo</h3>
     <p>
-            <a href="{{ url_for('urlupload') }}">URL File Upload</a>
+            <a href="{{ url_for('urlupload') }}">Click to Upload URL Photo</a>
+    </p>
+    <h3>Password Change</h3>
+    <p>
+            <a href="{{ url_for('change_password') }}">Click to Change Your Password</a>
     </p>
 
-    <hr>
+        <hr style="height:3px;border:none;color:#333;background-color:#333;" />
         <h4>Photo Upload History</h4>
         {% for file in all_files %}
             <img src="{{'/static/image/' + file}}" class="img-fluid" style="width: 128px">
         {% endfor %}
 
-        <hr>
+        <hr style="height:3px;border:none;color:#333;background-color:#333;" />
         <h4>No Face Photos</h4>
        {% for photo in photo_noface%}
             <img src="{{'/static/output/' + photo}}" class="img-fluid" style="width: 128px">
        {% endfor %}
 
-        <hr>
+        <hr style="height:3px;border:none;color:#333;background-color:#333;" />
         <h4>All Masked Photos</h4>
        {% for photo in photo_allmask%}
             <img src="{{'/static/output/' + photo}}" class="img-fluid" style="width: 128px">
        {% endfor %}
 
-        <hr>
+        <hr style="height:3px;border:none;color:#333;background-color:#333;" />
         <h4>No Masked Photos</h4>
        {% for photo in photo_nomask%}
             <img src="{{'/static/output/' + photo}}" class="img-fluid" style="width: 128px">
        {% endfor %}
 
-        <hr>
+        <hr style="height:3px;border:none;color:#333;background-color:#333;" />
         <h4>Partial Masked Photos</h4>
        {% for photo in photo_partmask%}
             <img src="{{'/static/output/' + photo}}" class="img-fluid" style="width: 128px">

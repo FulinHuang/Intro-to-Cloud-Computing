@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
-from app.model import User
+from app.user import User
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 
 class LoginForm(FlaskForm):
@@ -29,9 +29,14 @@ class RegistrationForm(FlaskForm):
         if user is not None:
             raise ValidationError('Please use a different email address.')
 
+class ChangePasswordForm(FlaskForm):
+    new_password = PasswordField('New Password', validators=[DataRequired()])
+    new_password2 = PasswordField(
+        'Repeat Password', validators=[DataRequired(), EqualTo('new_password')])
+    submit = SubmitField('Change Password')
+
 class DeleteAccountForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Delete')
 
 

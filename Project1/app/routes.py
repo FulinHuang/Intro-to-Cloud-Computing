@@ -1,8 +1,8 @@
 from flask import render_template, url_for, redirect, flash, jsonify, make_response, request
 from app import app, db
 from flask_login import login_user, logout_user, current_user, login_required
-from app.forms import LoginForm, RegistrationForm, DeleteAccountForm, URLUploadPhotoForm
-from app.model import User
+from app.forms import LoginForm, RegistrationForm, DeleteAccountForm, URLUploadPhotoForm, ChangePasswordForm
+from app.user import User
 from app.forms import ResetPasswordRequestForm
 from app.email import send_password_reset_email
 from app.forms import ResetPasswordForm
@@ -13,11 +13,13 @@ import cv2
 import urllib.request
 from FaceMaskDetection.pytorch_infer import inference
 from werkzeug.utils import secure_filename
-
+from datetime import datetime
 
 @app.route('/index')
 @login_required
 def index():
+    now = datetime.now()  # current date and time
+    date_time = now.strftime("%d/%m/%Y, %H:%M:%S")
     all_files = []
     photo_noface = []
     photo_allmask = []
@@ -35,21 +37,7 @@ def index():
         else:
             photo_partmask.append(photo.photourl)
     return render_template('index.html', title='Home', all_files=all_files, photo_noface=photo_noface,
-                           photo_allmask=photo_allmask, photo_nomask=photo_nomask, photo_partmask=photo_partmask)
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
-            return redirect(url_for('login'))
-        login_user(user, remember=form.remember_me.data)
-        return redirect(url_for('index'))
-    return render_template('login.html', title='LOGIN', form=form)
+                           photo_allmask=photo_allmask, photo_nomask=photo_nomask, photo_partmask=photo_partmask, date_time =date_time )
 
 
 @app.route('/logout')
@@ -60,19 +48,37 @@ def logout():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if current_user.get_id() != '1':  # get_id for Admin is 1
-        flash('Only Admin can register new account, please login first')
-        return redirect(url_for('login'))
-    else:
-        form = RegistrationForm()
+    if current_user.is_authenticated:
+        if current_user.get_username() != 'admin':
+            flash('Only Admin can register new account, please login if you are Admin')
+            return redirect(url_for('login'))
+        else:
+            form = RegistrationForm()
+            if form.validate_on_submit():
+                user = User(username=form.username.data, email=form.email.data)
+                user.set_password(form.password.data)
+                db.session.add(user)
+                db.session.commit()
+                flash('Congratulations, you just registered a user!')
+                return redirect(url_for('login'))
+            return render_template('register.html', title='REGISTER', form=form)
+    flash('Only Admin can register new account, please login first')
+    return redirect(url_for('login'))
+
+
+@app.route('/change_password', methods=['GET', 'POST'])
+def change_password():
+    if current_user.is_authenticated:
+        form = ChangePasswordForm()
         if form.validate_on_submit():
-            user = User(username=form.username.data, email=form.email.data)
-            user.set_password(form.password.data)
+            user = current_user
+            user.set_password(form.new_password.data)
             db.session.add(user)
             db.session.commit()
-            flash('Congratulations, you just registered a user!')
+            flash('You have changed your password, please re-login')
+            logout_user()
             return redirect(url_for('login'))
-        return render_template('register.html', title='REGISTER', form=form)
+        return render_template('change_password.html', title='CHANGE PASSWORD', form=form)
 
 
 @app.route('/api/register', methods=['POST'])
@@ -95,7 +101,7 @@ def register_test():
             "error": {"code": 400,
                       "message": "At least one field is empty!"
                       }
-            }
+        }
         )
     username = User.query.filter_by(username=user).first()
     if username:
@@ -105,7 +111,7 @@ def register_test():
                       "message": "Username already exist!"
                       }
         }
-    )
+        )
 
     user = User(username=user)
     user.set_password(password)
@@ -147,19 +153,44 @@ def reset_password(token):
 
 @app.route('/delete_account', methods=['GET', 'POST'])
 def delete_account():
-    form = DeleteAccountForm()
-    if form.validate_on_submit():
-        User.query.filter_by(username=form.username.data, email=form.email.data).delete()
-        db.session.commit()
-        flash('You have deleted an account successfully!')
+    if current_user.is_authenticated:
+        user_list = [[]]
+        user_parse = User.query.all()
+        for usernames in user_parse:
+            photo_count = 0
+            photo_has = Photo.query.filter_by(username=usernames.get_username()).all()
+            while photo_count < len(photo_has):
+                photo_count = photo_count + 1
+            user_list.append([usernames.get_username(), usernames.get_email(), photo_count])
+        if current_user.get_username() != 'admin':
+            flash('Only Admin can delete account, please login if you are Admin')
+            return redirect(url_for('login'))
+        else:
+            form = DeleteAccountForm()
+            if form.validate_on_submit():
+                User.query.filter_by(username=form.username.data).delete()
+                db.session.commit()
+                flash('You have deleted an account successfully!')
+                return redirect(url_for('index'))
+            return render_template('delete_account.html', title='Delete_Account', form=form, user_list=user_list)
+    flash('Only Admin can delete account, please login first')
+    return redirect(url_for('login'))
+
+
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
         return redirect(url_for('index'))
-    return render_template('delete_account.html', title='Delete_Account', form=form)
-
-
-@app.route('/', methods=['GET'])
-@app.route('/main', methods=['GET'])
-def main():
-    return render_template("main.html")
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('login'))
+        login_user(user, remember=form.remember_me.data)
+        return redirect(url_for('index'))
+    return render_template('login.html', title='LOGIN', form=form)
 
 
 @app.route('/index', methods=['POST'])
@@ -169,7 +200,7 @@ def upload():
     file_ext = os.path.splitext(filename)[1]
     filename = str(uuid.uuid4()) + file_ext
     if uploaded_file.filename != '':
-        if file_ext not in app.config['UPLOAD_EXTENSIONS']:
+        if file_ext not in app.config['UPLOAD_PHOTO_EXTENSIONS']:
             flash('Please choose a photo with correct format!')
             return redirect(url_for('index'))
         uploaded_file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
@@ -181,7 +212,9 @@ def upload():
     filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     num_face, num_mask, num_unmask = mask_detection(filepath, filename)
 
-    flash('In this photo, we have detected {} faces: {} with masks on while {} without masks faces on.'.format(num_face,num_mask,num_unmask))
+    flash('In this photo, we have detected {} faces: {} with masks on while {} without masks faces on.'.format(num_face,
+                                                                                                               num_mask,
+                                                                                                               num_unmask))
 
     return redirect(url_for('index'))
 
@@ -197,14 +230,16 @@ def urlupload():
         filename = str(uuid.uuid4()) + file_ext
         unique_file = filename
         if filename != '':
-            if file_ext in app.config['UPLOAD_EXTENSIONS']:
+            if file_ext in app.config['UPLOAD_PHOTO_EXTENSIONS']:
                 opener = urllib.request.URLopener()
                 filename, headers = opener.retrieve(photourl, os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 flash('Success!')
 
                 num_face, num_mask, num_unmask = mask_detection(filename, unique_file)
 
-                flash('In this photo, we have detected {} faces: {} with masks on while {} without masks faces on.'.format(num_face, num_mask, num_unmask))
+                flash(
+                    'In this photo, we have detected {} faces: {} with masks on while {} without masks faces on.'.format(
+                        num_face, num_mask, num_unmask))
                 return redirect(url_for('index'))
             flash('Please submit a photo with correct format!')
         else:
@@ -248,7 +283,6 @@ def upload_test():
             }
         })
 
-
     file = request.files['file']
     filename = secure_filename(file.filename)
     file_ext = os.path.splitext(filename)[1]
@@ -264,7 +298,7 @@ def upload_test():
         })
 
     if filename:
-        if file_ext not in app.config['UPLOAD_EXTENSIONS']:
+        if file_ext not in app.config['UPLOAD_PHOTO_EXTENSIONS']:
             message = "File type not supported!"
             return jsonify({
                 "success": False,
@@ -285,7 +319,7 @@ def upload_test():
                     "num_masked": num_mask,
                     "num_unmasked": num_unmask
                 }
-        })
+            })
 
 
 def mask_detection(filename, unique_file):
@@ -312,14 +346,9 @@ def mask_detection(filename, unique_file):
     else:
         image_type = 3
 
-
     u = Photo(username=current_user.username, photourl=unique_file, imagetype=image_type)
 
     db.session.add(u)
     db.session.commit()
 
     return num_face, num_mask, num_unmask
-
-
-
-
