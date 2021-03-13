@@ -4,6 +4,9 @@ import os
 arn = 'arn:aws:elasticloadbalancing:us-east-1:411033800461:loadbalancer/app/loadbalancer/36142359a6458967'
 dns = 'loadbalancer-1947271922.us-east-1.elb.amazonaws.com'
 target_arn = 'arn:aws:elasticloadbalancing:us-east-1:411033800461:targetgroup/1779lb/76c209c218e6fc76'
+target_group_dimension = 'targetgroup/allena2/c1b769c7b4575737'
+ELB_dimension = 'app/loadbalancer/3a7654beb0b62d6f'
+
 
 # Variable for creating an instance
 ImageId ='ami-03b4f4239f819d507'
