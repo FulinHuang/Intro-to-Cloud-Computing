@@ -2,59 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="beb9d699-2eff-4f5e-9096-8f1fffb3fe2b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/0504f9bb-f3fb-4e71-aba4-f06eee0830c1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/2c21977e-f6af-43fb-8c81-698c93d663a8.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/3655471c-88eb-46df-950b-e7251d03a292.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/3b2277cc-0195-4c82-9fcb-d9e60528494b.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/4d2dc4d3-80d0-49dc-a4f2-c75d71d4b7b1.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/4e2e8646-fda5-449f-8a77-7033356dff4e.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/7792dc7b-74ba-4b0e-bb4a-53cc614f82d8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/9cd7dc14-da84-4e96-8e48-fcc8c04bbf58.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/b10c774d-cc75-4204-90cd-6447d2d602a2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/d3c3fb20-fb22-418c-af41-c6a26302c532.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/fc11568a-1d81-4b4c-88f5-8a628bf03b6c.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/0504f9bb-f3fb-4e71-aba4-f06eee0830c1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/2c21977e-f6af-43fb-8c81-698c93d663a8.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/3655471c-88eb-46df-950b-e7251d03a292.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/3b2277cc-0195-4c82-9fcb-d9e60528494b.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/4d2dc4d3-80d0-49dc-a4f2-c75d71d4b7b1.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/4e2e8646-fda5-449f-8a77-7033356dff4e.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/7792dc7b-74ba-4b0e-bb4a-53cc614f82d8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/9cd7dc14-da84-4e96-8e48-fcc8c04bbf58.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/b10c774d-cc75-4204-90cd-6447d2d602a2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/d3c3fb20-fb22-418c-af41-c6a26302c532.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/fc11568a-1d81-4b4c-88f5-8a628bf03b6c.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/templates/change_password.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/.idea/Project1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/.idea/Project1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AutoScaleDB.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/auto_scaler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/awsManager.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Project1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/photo.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/photo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/image/26ea0fbc-fff8-4ccd-a6d3-25d79e7fbfb0.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/image/60ed0f21-e352-4537-bd84-43a83803e2a1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/image/7c299844-8509-4668-97b1-24106669db75.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/image/82ea8580-9b2b-4845-a821-62cf4f5646cf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/image/9b9aa761-1229-4cc6-98dc-fc5158bd5071.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/image/b8e473ef-ab21-430f-8241-d2136cab0dcf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/output/26ea0fbc-fff8-4ccd-a6d3-25d79e7fbfb0.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/output/60ed0f21-e352-4537-bd84-43a83803e2a1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/output/9b9aa761-1229-4cc6-98dc-fc5158bd5071.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/output/b8e473ef-ab21-430f-8241-d2136cab0dcf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/templates/delete_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/templates/delete_account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/templates/main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/templates/urlupload.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/templates/urlupload.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/migrations/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/migrations/alembic.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/migrations/env.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/migrations/script.py.mako" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Project2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Project2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -66,11 +24,128 @@
     <session id="-1488573748">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="html" value="2" />
+          <entry key="py" value="11" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="HTML" value="2" />
+          <entry key="Python" value="11" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="dummy" value="1" />
+          <entry key="py" value="5475" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="Python" value="5475" />
         </counts>
       </usages-collector>
     </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/auto_scaler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="380">
+              <caret line="35" column="67" selection-start-line="35" selection-start-column="67" selection-end-line="35" selection-end-column="67" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+                <marker date="1615609075604" expanded="true" signature="181:266" ph="..." />
+                <marker date="1615609075604" expanded="true" signature="979:980" ph="..." />
+                <marker date="1615609075604" expanded="true" signature="995:1009" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/awsManager.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="401">
+              <caret line="176" column="8" selection-start-line="176" selection-start-column="8" selection-end-line="176" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+                <marker date="1615609135830" expanded="true" signature="95:96" ph="..." />
+                <marker date="1615609135830" expanded="true" signature="3431:3438" ph="..." />
+                <marker date="1615609135830" expanded="true" signature="3993:3998" ph="..." />
+                <marker date="1615609135830" expanded="true" signature="4731:4759" ph="..." />
+                <marker date="1615609135830" expanded="true" signature="4759:4765" ph="..." />
+                <marker date="1615609135830" expanded="true" signature="4863:4872" ph="..." />
+                <marker date="1615609135830" expanded="true" signature="5117:5152" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="88">
+              <caret line="6" column="32" lean-forward="true" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/AutoScaleDB.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="3" lean-forward="true" selection-start-column="3" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/manager.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/routes.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -79,8 +154,27 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>get_healthy_ids</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/form.py" />
+        <option value="$PROJECT_DIR$/run.py" />
+        <option value="$PROJECT_DIR$/app/__init__.py" />
+        <option value="$PROJECT_DIR$/app/forms.py" />
+        <option value="$PROJECT_DIR$/app/AutoScaleDB.py" />
+        <option value="$PROJECT_DIR$/app/config.py" />
+        <option value="$PROJECT_DIR$/app/auto_scaler.py" />
+        <option value="$PROJECT_DIR$/app/awsManager.py" />
+      </list>
+    </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -95,17 +189,43 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="Project2" type="b2602c69:ProjectViewProjectNode" />
               <item name="Project2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Project2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Project2" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="Project2" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="Project2" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="Project2" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -115,6 +235,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -144,18 +265,22 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="722" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25767368" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.32857144" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -163,17 +288,131 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32857144" />
-      <window_info anchor="right" id="SciView" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.13809524" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32857144" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25767368" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32857144" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.13809524" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32857144" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="19" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/manager.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/worker_list.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/worker_control.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="6" column="32" lean-forward="true" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/AutoScaleDB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="3" lean-forward="true" selection-start-column="3" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/auto_scaler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="35" column="67" selection-start-line="35" selection-start-column="67" selection-end-line="35" selection-end-column="67" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+            <marker date="1615609075604" expanded="true" signature="181:266" ph="..." />
+            <marker date="1615609075604" expanded="true" signature="979:980" ph="..." />
+            <marker date="1615609075604" expanded="true" signature="995:1009" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/awsManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="176" column="8" selection-start-line="176" selection-start-column="8" selection-end-line="176" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+            <marker date="1615609135830" expanded="true" signature="95:96" ph="..." />
+            <marker date="1615609135830" expanded="true" signature="3431:3438" ph="..." />
+            <marker date="1615609135830" expanded="true" signature="3993:3998" ph="..." />
+            <marker date="1615609135830" expanded="true" signature="4731:4759" ph="..." />
+            <marker date="1615609135830" expanded="true" signature="4759:4765" ph="..." />
+            <marker date="1615609135830" expanded="true" signature="4863:4872" ph="..." />
+            <marker date="1615609135830" expanded="true" signature="5117:5152" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
