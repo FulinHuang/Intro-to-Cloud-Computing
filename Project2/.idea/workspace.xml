@@ -2,84 +2,44 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="beb9d699-2eff-4f5e-9096-8f1fffb3fe2b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/0504f9bb-f3fb-4e71-aba4-f06eee0830c1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/2c21977e-f6af-43fb-8c81-698c93d663a8.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/3655471c-88eb-46df-950b-e7251d03a292.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/3b2277cc-0195-4c82-9fcb-d9e60528494b.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/4d2dc4d3-80d0-49dc-a4f2-c75d71d4b7b1.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/4e2e8646-fda5-449f-8a77-7033356dff4e.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/7792dc7b-74ba-4b0e-bb4a-53cc614f82d8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/9cd7dc14-da84-4e96-8e48-fcc8c04bbf58.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/b10c774d-cc75-4204-90cd-6447d2d602a2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/d3c3fb20-fb22-418c-af41-c6a26302c532.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/image/fc11568a-1d81-4b4c-88f5-8a628bf03b6c.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/0504f9bb-f3fb-4e71-aba4-f06eee0830c1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/2c21977e-f6af-43fb-8c81-698c93d663a8.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/3655471c-88eb-46df-950b-e7251d03a292.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/3b2277cc-0195-4c82-9fcb-d9e60528494b.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/4d2dc4d3-80d0-49dc-a4f2-c75d71d4b7b1.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/4e2e8646-fda5-449f-8a77-7033356dff4e.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/7792dc7b-74ba-4b0e-bb4a-53cc614f82d8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/9cd7dc14-da84-4e96-8e48-fcc8c04bbf58.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/b10c774d-cc75-4204-90cd-6447d2d602a2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/d3c3fb20-fb22-418c-af41-c6a26302c532.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/static/output/fc11568a-1d81-4b4c-88f5-8a628bf03b6c.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Project1/app/templates/change_password.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/static/logo1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Project1/.idea/Project1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/.idea/Project1.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Project1/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Project1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/photo.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/photo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/image/26ea0fbc-fff8-4ccd-a6d3-25d79e7fbfb0.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/image/60ed0f21-e352-4537-bd84-43a83803e2a1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/image/7c299844-8509-4668-97b1-24106669db75.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/image/82ea8580-9b2b-4845-a821-62cf4f5646cf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/image/9b9aa761-1229-4cc6-98dc-fc5158bd5071.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/image/b8e473ef-ab21-430f-8241-d2136cab0dcf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/output/26ea0fbc-fff8-4ccd-a6d3-25d79e7fbfb0.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/output/60ed0f21-e352-4537-bd84-43a83803e2a1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/output/9b9aa761-1229-4cc6-98dc-fc5158bd5071.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/static/output/b8e473ef-ab21-430f-8241-d2136cab0dcf.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/templates/delete_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/templates/delete_account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/templates/main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/app/templates/urlupload.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Project1/app/templates/urlupload.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/migrations/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/migrations/alembic.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/migrations/env.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project1/migrations/script.py.mako" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Project2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Project2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/CSS/img" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/CSS/img" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/worker_control.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/worker_control.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/worker_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/worker_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/workers.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/workers.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-1488573748">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="1" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -93,7 +53,10 @@
     <option name="width" value="1280" />
     <option name="height" value="722" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="1pVeXN1uaopQzSyT1e3TFhnJIno" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -113,24 +76,80 @@
       </pane>
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Project1" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\ece\A2_Allen\Intro-to-Cloud-Computing\Project2\app\templates" />
+      <recent name="C:\ece\A2_Allen\Intro-to-Cloud-Computing\Project2\app" />
+    </key>
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="Project2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="aws_access_key_id" value="ASIAQFKPZRANMODSD6E4" />
+        <env name="aws_secret_access_key" value="WB96M253P1s2EfQipkyuzWNMQXZPN7al0c5xsxXo" />
+        <env name="aws_session_token" value="FwoGZXIvYXdzEGcaDMRTNqzpwGki9/OeYCLLAUXzST3L/sDtXMRZIpPr79iA0sAXCd5lxm5xdXMg69TiEiUoN+Z59zwRI4em4rBalbcHREyYXkxPBGdmg02lgomjUoihGyDlehCnjmXbUtHqfVRcgraU2ndeslMORf8/djdG3LrqzDJWkB1MhoFDBU82o9M5DtjvYKZcOvIvHGuCqdFL66tjA6u/hMh3f0ikjXTnA0Z4VszDeABlC2QBj2Kcb7nkJSnmu6u1XrN0E0Z0wAO8T9zGoUx008io/7FIUVhT97B5J9vhb2QuKPH6pIIGMi0iwcHP8xfHMGFjo1CtCYYEx947DMMmp9HHRnarPQDwid5Y3nWi0Mvvz7ZW+w0=" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Allen\AppData\Local\Microsoft\WindowsApps\python3.9.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="run" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Project2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.run" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -173,7 +192,15 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

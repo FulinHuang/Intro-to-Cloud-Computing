@@ -2,17 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f697c034-3f57-4aae-a5c2-232b8adb7cb2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Project2/app/manager.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project2/app/routes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project2/app/templates/CSS/img" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project2/app/templates/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project2/app/templates/home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project2/app/templates/includes/_messages.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project2/app/templates/worker_control.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project2/app/templates/worker_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project2/app/templates/workers.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Project1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Project1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/email.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/email.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/change_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/change_password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/delete_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/delete_account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/email/reset_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/email/reset_password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/email/reset_password.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/email/reset_password.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/urlupload.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/urlupload.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project2/.idea/Project2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project2/.idea/Project2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project2/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project2/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project2/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project2/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project2/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project2/app/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project2/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project2/run.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -308,6 +315,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
