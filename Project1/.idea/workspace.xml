@@ -2,7 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f697c034-3f57-4aae-a5c2-232b8adb7cb2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Project2/app/manager.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project2/app/routes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project2/app/templates/CSS/img" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project2/app/templates/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project2/app/templates/home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project2/app/templates/includes/_messages.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project2/app/templates/worker_control.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project2/app/templates/worker_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Project2/app/templates/workers.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Project1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Project1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/../Project2/.idea/Project2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project2/.idea/Project2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project2/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project2/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project2/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project2/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project2/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project2/app/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Project2/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Project2/run.py" afterDir="false" />
+>>>>>>> 86762fce6d551fcd8f1b803a971fd4e9fbb88c9e
     </list>
     <ignored path="$PROJECT_DIR$/venv/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -408,6 +428,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />

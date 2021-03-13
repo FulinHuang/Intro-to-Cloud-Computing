@@ -1,3 +1,5 @@
+import os
+
 # balancer
 arn = 'arn:aws:elasticloadbalancing:us-east-1:411033800461:loadbalancer/app/loadbalancer/36142359a6458967'
 dns = 'loadbalancer-1947271922.us-east-1.elb.amazonaws.com'
@@ -38,4 +40,10 @@ Content-Disposition: attachment; filename="userdata.txt"
 ./start.sh
 --//
 '''
+
+class Config(object):
+    SECRET_KEY = 'ECE1779'
+    SQLALCHEMY_DATABASE_URI = 'mysql://allen_admin:lu19920218@allen-ece1779-a1.c7mezzt0p0rf.us-east-1.rds.amazonaws.com/dbname'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
 
