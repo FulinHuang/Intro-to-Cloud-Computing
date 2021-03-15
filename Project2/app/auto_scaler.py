@@ -1,8 +1,9 @@
 import boto3
 from app import app, db
 from app.AutoScaleDB import AutoScaleDB
-from app import awsManager
+from app import awsManager 
 from sqlalchemy import desc
+import schedule
 
 
 manager = awsManager.Manager()
@@ -13,12 +14,11 @@ def get_data():
 
 
 def auto_scaler():
-    autoDb = auto_scaler()
-
-    avg_threshold = 0  # TODO: change it to average cpu
-
+    autoDb = get_data()
     instance_ids = []
+
     running_instances = manager.get_user_instances('running')
+    avg_threshold = manager.avg_cpu(running_instances)
 
     for instance in running_instances:
         instance_ids.append(instance.id)
@@ -41,6 +41,4 @@ def auto_scaler():
 
 
 if __name__ ==   '__main__':
-    auto_scaler()
-    # TODO: Schedule time
-
+    schedule.every(60).seconds.do(auto_scaler)

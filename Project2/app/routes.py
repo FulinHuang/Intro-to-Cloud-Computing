@@ -2,6 +2,7 @@ from app import app
 from flask import render_template, url_for, redirect, flash, jsonify, make_response, request
 from app import app, db
 from app import manager
+from app import awsManager
 import matplotlib.pyplot as plt
 import io
 import base64
@@ -13,12 +14,15 @@ import atexit
 import time
 import requests
 
+awsmanager = awsManager.Manager()
+
+
 # from app.form import autoscalingForm, Photo, User
 
 # Worker list page: select each running instance and show the details in worker_list.html
 @app.route('/worker_list')
 def worker_list():
-    instance = manager.select_running_inst()
+    instance = awsmanager.get_user_instances('running')
     return render_template('worker_list.html', instance_list=instance)
 
 
@@ -27,7 +31,7 @@ def worker_list():
 def home():
     plt.switch_backend('agg') #Allen - resolve plt runtime error
     #    x_axis, inst_num = 5, 5 #test
-    x_axis, inst_num = manager.number_workers()
+    x_axis, inst_num = awsmanager.number_workers()
     plt.plot(x_axis, inst_num, marker='+')
     plt.xlabel('Time (minutes)', fontsize=10)
     plt.ylabel('Instance number', fontsize=10)
@@ -45,8 +49,8 @@ def home():
 @app.route('/<instance_id>', methods=['GET', 'POST'])
 def view(instance_id):
     plt.switch_backend('agg') #Allen - resolve plt runtime error
-    time_list, cpu_list = manager.inst_CPU(instance_id)
-    list_time, http_list = manager.inst_HTTP(instance_id)
+    time_list, cpu_list = awsmanager.inst_CPU(instance_id)
+    list_time, http_list = awsmanager.inst_HTTP(instance_id)
     plt.plot(time_list, cpu_list, 'k', marker='+')
     plt.xlabel('Time (minutes)', fontsize=10)
     plt.ylabel('CPU utilization (%)', fontsize=10)
@@ -81,83 +85,33 @@ def worker_control():
 
 @app.route('/increase_workers', methods=['GET', 'POST'])
 def increase_workers():
-    ec2 = boto3.resource('ec2')
-    instances = ec2.instances.filter(
-        Filters=[
+    instance_ids = []
+    running_instances = manager.get_user_instances('running')
+    for instance in running_instances:
+        instance_ids.append(instance.id)
+    num_instance = len(instance_ids)
+    max_instance = 8
 
-            {'Name': 'placement-group-name',
-             'Values': [config.worker_group]},
+    if num_instance < max_instance:
+        awsManager.create_new_instance()
+    else:
+        print('Full work load!')
+    redirect(url_for('worker_control'))
 
-            {'Name': 'instance-state-name',
-             'Values': ['running']},  # filter running instances
-
-            {'Name': 'image-id',
-             'Values': [config.image_id]},
-        ]
-    )
 
 
 @app.route('/decrease_workers', methods=['GET', 'POST'])
 def decrease_workers():
-    ec2 = boto3.resource('ec2')
-    instances = ec2.instances.filter(
-        Filters=[
+    instance_ids = []
+    running_instances = manager.get_user_instances('running')
+    for instance in running_instances:
+        instance_ids.append(instance.id)
+    num_instance = len(instance_ids)
+    min_instance = 1
 
-            {'Name': 'placement-group-name',
-             'Values': [config.worker_group]},
-
-            {'Name': 'instance-state-name',
-             'Values': ['running']},
-
-            {'Name': 'image-id',
-             'Values': [config.image_id]},
-        ]
-    )
-    # Select the running instances
-    inst_id = []
-    for instance in instances:
-        inst_id.append(instance.id)
-
-    # If there are more than one running instances, remove the oldest one
-    if len(inst_id) > 1:
-        inst_Id = inst_id[0]  # instance ID of the removing instance
-        print('Deregistering instance-ID:', inst_Id)
-        elb = boto3.client('elbv2')
-        elb.deregister_targets(
-            TargetGroupArn=config.target_group_arn,
-            Targets=[
-                {
-                    'Id': inst_Id,
-                },
-            ]
-        )
-
-        waiter = elb.get_waiter('target_deregistered')
-        waiter.wait(
-            TargetGroupArn=config.target_group_arn,
-            Targets=[
-                {
-                    'Id': inst_Id,
-                },
-            ],
-        )
-        print('Instance-ID: ', inst_Id, 'is deregistered!')
-
-        print('Terminating instance-ID:', inst_Id)
-        # Check whether the instance can be found by its ID
-        instance = ec2.instances.filter(InstanceIds=[inst_Id])
-        if instance is not None:
-            for inst in instance:
-                inst.terminate()
-                # Waits until the instance is terminated
-                inst.wait_until_terminated(
-                    Filters=[
-                        {
-                            'Name': 'instance-id',
-                            'Values': [inst.id]
-                        },
-                    ],
-                )
-                print('Instance-ID: ', inst.id, ' is terminated')
+    if num_instance > min_instance:
+        awsManager.remove_instance(instance_ids[0])
+    else:
+        print("Cannot remove: min work load")
 
     return redirect(url_for('worker_control'))
