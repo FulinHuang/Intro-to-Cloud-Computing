@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 class Manager:
 
     def __init__(self):
-        self.ec2 = boto3.client('ec2')
+        self.ec2 = boto3.resource('ec2')
         self.elb = boto3.client('elbv2')
         self.cloudwatch = boto3.client('cloudwatch')
 
@@ -155,21 +155,21 @@ class Manager:
     # Create a ec2 instance
     def create_new_instance(self):
         try:
-            new_instance = self.ec2.run_instances(
+            response = self.ec2.create_instances(
                 ImageId = config.ImageId,
                 MinCount = 1,
                 MaxCount = 1,
                 InstanceType = 't2.large',
                 KeyName = config.KeyName,
-                Monitoring = {'Enable': True},
-                TagSpecialications = config.tag_specificatios,
+                Monitoring = {'Enabled': True},
+                TagSpecifications = config.tag_specificatios,
                 Placement = config.placement,
-                SecurityGroups = config.security_group,
+                SecurityGroups = [config.security_group_Irene],
                 IamInstanceProfile = config.iam_instance_profile,
                 UserData = config.user_data
 
             )
-            new_instance = new_instance[0]
+            new_instance = response[0]
 
             # Wait for state to change before register it to a target group
             new_instance.wait_until_running(
@@ -180,12 +180,18 @@ class Manager:
                     }
                 ]
             )
+            print("wait until running")
             new_instance.reload()
 
             # Register to a target group
             response = self.register_to_target_group(new_instance)
-            print(response)
+            print("registered to a target group :", response)
 
+            instances = self.get_user_instances("running")
+            instance_id = []
+            for instance in instances:
+                instance_id.append(instance.id)
+            print('Our worker pool has', len(instance_id), "instances running currently, initiating done.")
 
             return new_instance
 
@@ -197,11 +203,10 @@ class Manager:
     # Get all user instances
     # State could be : running, pending, stopped, etd ...
     def get_user_instances(self, state):
-        instance_list = []
         # Look for all user instances that satisfy the conditions
-        instances = self.ec2.describe_instances(
-            Filters=[{'Name': 'tag:Name',
-                      'Values': [config.user_tag]
+        responses = self.ec2.instances.filter(
+            Filters=[{'Name': 'placement-group-name',
+                      'Values': [config.user_placement]
                       },
                      {
                          'Name': 'instance-state-name',
@@ -211,19 +216,17 @@ class Manager:
                       'Values': [config.ImageId]}
                      ]
         )
-        for instance in instances:
-            instance_list.append(instance)
 
-        return instance_list
+        return responses
 
 
     # Register an ec2 instance to destinated target group
     def register_to_target_group(self, instance):
         response = self.elb.register_targets(
             TargetGroupArn=config.target_arn,
-            Targets= {
+            Targets= [{
                 'Id': instance.id
-            })
+            }])
 
         # check response
         if response['ResponseMetadata']['HTTPStatusCode'] == 200:
@@ -252,8 +255,14 @@ class Manager:
         self.unregister_from_target_group(instanceId)
 
         # Terminate instance by instanceId
-        self.ec2.instances.filter(InstanceIds=instanceId).terminate()
+        self.ec2.instances.filter(InstanceIds=[instanceId]).terminate()
         print("Instance i " + instanceId + " is terminated")
+
+        instances = self.get_user_instances("running")
+        instance_id = []
+        for instance in instances:
+            instance_id.append(instance.id)
+        print('Our worker pool has', len(instance_id), "instances running currently")
         # TODO:  catch exception
 
 
@@ -274,7 +283,10 @@ class Manager:
                 'MaxAttempts': 40
             }
         )
+
         print("Instance id " + instanceId + " is deregistered")
+
+
 
 
     def get_healthy_ids(self):

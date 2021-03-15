@@ -9,11 +9,13 @@ import schedule
 manager = awsManager.Manager()
 
 def get_data():
-    autoDb = AutoScaleDB.order_by(desc(AutoScaleDB.id)).first()
+    autoDb = AutoScaleDB.query.order_by(desc(AutoScaleDB.id)).first()
     return autoDb
 
 
 def auto_scaler():
+    print("Running auto scaler")
+
     autoDb = get_data()
     instance_ids = []
 
@@ -39,6 +41,3 @@ def auto_scaler():
         print("No change")
 
 
-
-if __name__ ==   '__main__':
-    schedule.every(60).seconds.do(auto_scaler)

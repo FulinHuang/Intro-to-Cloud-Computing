@@ -1,8 +1,9 @@
 from app import app
 from flask import render_template, url_for, redirect, flash, jsonify, make_response, request
 from app import app, db
-from app import manager
+from app.AutoScaleDB import AutoScaleDB
 from app import awsManager
+from app import auto_scaler
 import matplotlib.pyplot as plt
 import io
 import base64
@@ -13,6 +14,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 import atexit
 import time
 import requests
+import schedule
 
 awsmanager = awsManager.Manager()
 
@@ -86,32 +88,82 @@ def worker_control():
 @app.route('/increase_workers', methods=['GET', 'POST'])
 def increase_workers():
     instance_ids = []
-    running_instances = manager.get_user_instances('running')
+    running_instances = awsmanager.get_user_instances('running')
     for instance in running_instances:
         instance_ids.append(instance.id)
     num_instance = len(instance_ids)
     max_instance = 8
 
     if num_instance < max_instance:
-        awsManager.create_new_instance()
+        awsmanager.create_new_instance()
     else:
         print('Full work load!')
-    redirect(url_for('worker_control'))
-
+    return redirect(url_for('worker_control'))
 
 
 @app.route('/decrease_workers', methods=['GET', 'POST'])
 def decrease_workers():
     instance_ids = []
-    running_instances = manager.get_user_instances('running')
+    running_instances = awsmanager.get_user_instances('running')
     for instance in running_instances:
         instance_ids.append(instance.id)
     num_instance = len(instance_ids)
     min_instance = 1
 
     if num_instance > min_instance:
-        awsManager.remove_instance(instance_ids[0])
+        awsmanager.remove_instance(instance_ids[0])
     else:
         print("Cannot remove: min work load")
+        instances_new = awsmanager.get_user_instances('running')
 
+        inst_id_new = []
+        for instance in instances_new:
+            inst_id_new.append(instance.id)
+        print('Our worker pool has', len(inst_id_new), "instances running currently.")
     return redirect(url_for('worker_control'))
+
+
+# @app.before_first_request
+# # Automatically check if any instance exists.
+# # Resize the worker pool size to 1
+# # If no instance exists, create one
+# # If more than one instance, delete to one
+# def auto_check():
+#     print('Initiating first check...')
+#
+#     instances = awsmanager.get_user_instances('running')
+#     inst_id = []
+#
+#     for instance in instances:
+#         inst_id.append(instance.id)
+#
+#     print("There are ", len(inst_id), " running instances")
+#
+#     if len(inst_id) > 1:
+#         print('We currently have {} instance running, will shrink to 1...'.format(len(inst_id)))
+#         for i in range(1, len(inst_id)):
+#             awsmanager.remove_instance(inst_id[i])
+#             print('This instance: {} has been removed successfully.'.format(inst_id[i]))
+#
+#     elif len(inst_id) == 0:
+#         print('No running instances exist, we are create an instance...')
+#         awsmanager.create_new_instance()
+#
+#
+#     else:
+#         print('Our worker pool has 1 instance running currently, initiating done.')
+
+
+@app.before_first_request
+def db_init():
+    # db_value = AutoScaleDB(
+    #     cpu_max=70,
+    #     cpu_min=20,
+    #     ratio_expand=2,
+    #     ratio_shrink=0.5,
+    #     timestamp=datetime.now())
+    # db.session.add(db_value)
+    # db.session.commit()
+    # print("Database is initialized")
+
+    schedule.every(1).minutes.do(auto_scaler.auto_scaler())

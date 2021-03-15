@@ -6,26 +6,26 @@ from datetime import datetime, timedelta
 # Get CPU utilization of the worker in past 30 min from cloudwatch
 def inst_CPU(inst_id):
     ec2 = boto3.resource('ec2')
-    instance = ec2.Instance(inst_id) # Identify the instance by ID
+    instance = ec2.Instance(inst_id)  # Identify the instance by ID
     watch = boto3.client('cloudwatch')
     start = 31
     end = 30  # the fist time interval is 31 to 30
-    CPU_utl = []     # A list to store CPU utilization in past 30 min
+    CPU_utl = []  # A list to store CPU utilization in past 30 min
     for times in range(0, 30):
         CPU = watch.get_metric_statistics(
-                Namespace='AWS/EC2',
-                MetricName='CPUUtilization',
-                Dimensions=[
-                    {
-                        'Name': 'InstanceId',
-                        'Value': instance.id
-                    },
-                ],
-                StartTime=datetime.utcnow() - timedelta(seconds=start * 60),
-                EndTime=datetime.utcnow() - timedelta(seconds=end * 60),
-                Period=30,  # Every 60 sec get once data
-                Statistics=['Average']
-            )
+            Namespace='AWS/EC2',
+            MetricName='CPUUtilization',
+            Dimensions=[
+                {
+                    'Name': 'InstanceId',
+                    'Value': instance.id
+                },
+            ],
+            StartTime=datetime.utcnow() - timedelta(seconds=start * 60),
+            EndTime=datetime.utcnow() - timedelta(seconds=end * 60),
+            Period=30,  # Every 60 sec get once data
+            Statistics=['Average']
+        )
         print('***CPU info:', CPU)
         # Time interval shifts by 1 min
         start -= 1
@@ -36,9 +36,9 @@ def inst_CPU(inst_id):
             utilization = round(data['Average'], 2)  # Round off the float, keep 2 digits
         CPU_utl.append(utilization)  # Contain 30 CPU utilzations values
 
-
-    x_axis =list(range(1, 31))
+    x_axis = list(range(1, 31))
     return x_axis, CPU_utl
+
 
 # Get HTTP request rate of the worker in past 30 min
 def inst_HTTP(inst_id):
@@ -111,7 +111,6 @@ def number_workers():
         start -= 1
         end -= 1
 
-
     x_axis = list(range(0, len(inst_num)))
 
     return x_axis, inst_num
@@ -139,6 +138,47 @@ def select_running_inst():
     inst_id = []
     for instance in instances:
         inst_id.append(instance.id)  # List of the running instance IDs
-    print('We have {} instances now!'.format(len(inst_id)))
+    print('We have {} instances now:'.format(len(inst_id)))
     print(inst_id)
     return instances  # Return the running instances
+
+
+# Remove the targeted instance
+def instance_remove(inst_Id):
+    ec2 = boto3.resource('ec2')
+    print('This instance:', inst_Id, 'is being de-registered...')
+    elb = boto3.client('elbv2')
+    elb.deregister_targets(
+        TargetGroupArn=config.target_group_arn,
+        Targets=[
+            {
+                'Id': inst_Id,
+            },
+        ]
+    )
+
+    waiter = elb.get_waiter('target_deregistered')
+    waiter.wait(
+        TargetGroupArn=config.target_group_arn,
+        Targets=[
+            {
+                'Id': inst_Id,
+            },
+        ],
+    )
+    print('This instance:', inst_Id, 'has been de-registered.')
+    print('We are terminating instance:', inst_Id, '...')
+
+    instance = ec2.instances.filter(InstanceIds=[inst_Id])
+    if instance is not None:
+        for inst in instance:
+            inst.terminate()
+            inst.wait_until_terminated(
+                Filters=[
+                    {
+                        'Name': 'instance-id',
+                        'Values': [inst.id]
+                    },
+                ],
+            )
+            print('This instance:', inst.id, 'has been successfully terminated.')
