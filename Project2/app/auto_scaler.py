@@ -1,9 +1,7 @@
-import boto3
 from app import app, db
 from app.AutoScaleDB import AutoScaleDB
 from app import awsManager 
 from sqlalchemy import desc
-import schedule
 
 
 manager = awsManager.Manager()

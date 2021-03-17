@@ -60,7 +60,8 @@ Content-Disposition: attachment; filename="userdata.txt"
 
 class Config(object):
     SECRET_KEY = 'ECE1779'
-    SQLALCHEMY_DATABASE_URI = 'mysql://allen_admin:lu19920218@allen-ece1779-a1.c7mezzt0p0rf.us-east-1.rds.amazonaws.com/dbname'
+    # SQLALCHEMY_DATABASE_URI = 'mysql://allen_admin:lu19920218@allen-ece1779-a1.c7mezzt0p0rf.us-east-1.rds.amazonaws.com/dbname'
+    SQLALCHEMY_DATABASE_URI = 'mysql://admin:ece1779a2@database-1.c6ylehamglk7.us-east-1.rds.amazonaws.com/database1'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 

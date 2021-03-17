@@ -62,8 +62,8 @@ class Manager:
                         'Value': instance.id
                     },
                 ],
-                StartTime=datetime.utcnow(),
-                EndTime=datetime.utcnow() - timedelta(seconds=120),
+                StartTime=datetime.utcnow() - timedelta(seconds=120),
+                EndTime=datetime.utcnow(),
                 Period=60,
                 Statistics=['Average']
             )
@@ -72,7 +72,11 @@ class Manager:
                 data_avg = data['Average']
                 cpu.append(data_avg)
 
-        avg_cpu = sum(cpu) / len(cpu)
+        if len(cpu) != 0:
+            avg_cpu = sum(cpu) / len(cpu)
+        else:
+            avg_cpu = sum(cpu)
+
         return avg_cpu
 
 
@@ -191,7 +195,7 @@ class Manager:
             instance_id = []
             for instance in instances:
                 instance_id.append(instance.id)
-            print('Our worker pool has', len(instance_id), "instances running currently, initiating done.")
+            print('Our worker pool has', len(instance_id), "instances running currently.")
 
             return new_instance
 
