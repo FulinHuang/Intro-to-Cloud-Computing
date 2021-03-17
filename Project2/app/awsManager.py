@@ -10,6 +10,7 @@ class Manager:
         self.ec2 = boto3.resource('ec2')
         self.elb = boto3.client('elbv2')
         self.cloudwatch = boto3.client('cloudwatch')
+        self.s3 = boto3.resource('s3')
 
 
     # Get CPU utilization of the worker in past 30 min from cloudwatch
@@ -343,6 +344,33 @@ class Manager:
         remove_id = instance_ids[:num_decrease]
         for id in remove_id:
             self.remove_instance(id)
+
+
+    def terminate_all(self):
+
+        # Stop all workers
+        instances = self.get_user_instances('running')
+        inst_id = []
+        for instance in instances:
+            inst_id.append(instance.id)
+        print("There are ", len(inst_id), " running instances")
+
+        for i in range(1, len(inst_id)):
+            self.remove_instance(inst_id[i])
+            print('This woker instance: {} has been removed successfully.'.format(inst_id[i]))
+
+        # Stop manager
+        manager_instance = self.ec2.instances.filter(InstanceIds=[config.manager_instance])
+        manager_instance.stop()
+        print("Manager is stopped")
+
+
+    def clear_s3(self):
+        bucket = self.s3.Bucket(config.s3_name)
+        bucket.objects.all().delete()
+        print("S3 data are deleted")
+        return
+
 
 
 

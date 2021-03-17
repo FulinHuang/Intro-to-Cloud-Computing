@@ -20,7 +20,10 @@ arn = 'arn:aws:elasticloadbalancing:us-east-1:411033800461:loadbalancer/app/load
 dns = 'loadbalancer-1947271922.us-east-1.elb.amazonaws.com'
 target_arn = 'arn:aws:elasticloadbalancing:us-east-1:411033800461:targetgroup/1779lb/76c209c218e6fc76'
 target_group_dimension = 'targetgroup/1779lb/76c209c218e6fc76'
-ELB_dimension = 'app/loadbalancer/36142359a6458967' ## ?? 
+ELB_dimension = 'app/loadbalancer/36142359a6458967'
+
+# S3
+s3_name = 'bucket1779'
 
 # Variable for creating an instance
 ImageId ='ami-03b4f4239f819d507'
@@ -28,6 +31,7 @@ KeyName ='ece1779-manager'
 user_tag = 'user'
 user_placement = 'usergroup'
 manager_tag = 'manager'
+manager_instance = 'i-0530347cfe20bd7ff'
 tag_specificatios = [{
             'ResourceType': 'instance',
             'Tags': [{'Key': 'Name','Value': user_tag}]}]

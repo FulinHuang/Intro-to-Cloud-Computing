@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, url_for, redirect, flash, jsonify, make_response, request
+from flask import render_template, url_for, redirect
 from app import app, db
 from app.AutoScaleDB import AutoScaleDB
 from app import awsManager
@@ -7,11 +7,8 @@ from app import auto_scaler
 import matplotlib.pyplot as plt
 import io
 import base64
-import boto3
 from app import config
 from datetime import datetime, timedelta
-from apscheduler.schedulers.background import BackgroundScheduler
-import atexit
 import time
 import requests
 import schedule
@@ -125,15 +122,30 @@ def decrease_workers():
     return redirect(url_for('worker_control'))
 
 
+@app.route('/terminate_all')
+def terminate_all():
+
+    # Stop scheduling
+    cancel_job()
+
+    # Terminate all workers and stop manager
+    awsmanager.terminate_all()
+    return redirect(url_for('terminate_worker'))  # TODO - can modify the template name
 
 
-# Before starting the website
+# Delete all data in the database & S3
+@app.route('/clear')
+def clear_all():
+    # Delete RDS data
+    db.session.query(AutoScaleDB).delete()
+
+    # Delete S3 data
+    awsmanager.clear_s3()
+    return redirect(url_for('clear_data')) # TODO - can modify the template name
+
+
+# Check the # workers before launching the website
 @app.before_first_request
-
-# Automatically check if any instance exists.
-# Resize the worker pool size to 1
-# If no instance exists, create one
-# If more than one instance, delete to one
 def auto_check():
     print('Initiating first check...')
 
@@ -145,22 +157,22 @@ def auto_check():
 
     print("There are ", len(inst_id), " running instances")
 
-    if len(inst_id) > 1:
+
+    if len(inst_id) == 0:
+        print('No running instances exist, we are create an instance...')
+        awsmanager.create_new_instance()
+
+    elif len(inst_id) > 1:
         print('We currently have {} instance running, will shrink to 1...'.format(len(inst_id)))
         for i in range(1, len(inst_id)):
             awsmanager.remove_instance(inst_id[i])
             print('This instance: {} has been removed successfully.'.format(inst_id[i]))
 
-    elif len(inst_id) == 0:
-        print('No running instances exist, we are create an instance...')
-        awsmanager.create_new_instance()
-
-
     else:
         print('Our worker pool has 1 instance running currently, initiating done.')
 
 
-
+# Initialize the database & start auto-scaler before launching the website
 @app.before_first_request
 def db_init():
     value = AutoScaleDB.query.order_by(desc(AutoScaleDB.id)).first()
@@ -182,3 +194,9 @@ def db_init():
     while True:
         schedule.run_pending()
         time.sleep(1)
+
+
+# =========== Helpers ===========
+def cancel_job():
+    print("Cancel job")
+    return schedule.CancelJob
