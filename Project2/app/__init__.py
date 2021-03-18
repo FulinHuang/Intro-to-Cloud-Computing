@@ -10,3 +10,4 @@ db = SQLAlchemy(app)
 instance_start_time = time.time()
 from app import routes
 from app import manager
+from app import auto_scaler

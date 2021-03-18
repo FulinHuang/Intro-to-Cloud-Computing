@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content-section" style="position:relative;top:150px;" >
+    <center> <h4 style="margin-left:20px;">Auto Scaling Configuration</h4></center>
+</div>
+<div class="container-fluid" >
+    <style>
+    input[type=number] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  background-color: #ccebff;
+  color: black;
+    }
+    input[type=button], input[type=submit] {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  cursor: pointer;
+   }
+    </style>
+    <header class="jumbotron my-4" style="position:relative;top:150px;>
+    {% if success == True %}
+    <div class="alert alert-success">Auto Scaler Updated</div>
+    {% endif %}
+    <form method="post" action='/auto_scale'>
+        <div class="form-group row ">
+                <div class="form-group col-md-12 ">
+                  <label for="threshold_max">Threshold Max</label>
+                  <input type="number" step="0.01" class="form-control"  placeholder="threshold_max" name="threshold_max">
+                </div>
+        </div>
+        <div class="form-group row">
+                <div class="form-group col-md-12">
+                  <label for="threshold_min">Threshold Min</label>
+                  <input type="number" step="0.01" class="form-control"  placeholder="threshold_min" name="threshold_min">
+                </div>
+        </div>
+        <div class="form-group row">
+                <div class="form-group col-md-12">
+                  <label for="ratio_expand">Ratio of Expand</label>
+                  <input type="number" step="0.01" class="form-control"  placeholder="ratio_expand" name="ratio_expand">
+                </div>
+        </div>
+        <div class="form-group row">
+                <div class="form-group col-md-12">
+                  <label for="ratio_shrink">Ratio of Shrink</label>
+                  <input type="number" step="0.01" class="form-control"  placeholder="ratio_shrink" name="ratio_shrink">
+                </div>
+        </div>
+        <input class="col-md-12" type="submit" value="Submit">
+    </form>
+    </header>
+
+</div>
+{% endblock content %}

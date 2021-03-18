@@ -4,6 +4,7 @@ from app import app, db
 from app.AutoScaleDB import AutoScaleDB
 from app import awsManager
 from app import auto_scaler
+from app import AutoScaleDB
 import matplotlib.pyplot as plt
 import io
 import base64
@@ -32,7 +33,6 @@ def worker_list():
 @app.route('/home')
 def home():
     plt.switch_backend('agg') #Allen - resolve plt runtime error
-    #    x_axis, inst_num = 5, 5 #test
     x_axis, inst_num = awsmanager.number_workers()
     plt.plot(x_axis, inst_num, marker='+')
     plt.xlabel('Time (minutes)', fontsize=10)
@@ -154,7 +154,7 @@ def decrease_workers():
 #         print('Our worker pool has 1 instance running currently, initiating done.')
 
 
-@app.before_first_request
+#@app.before_first_request
 def db_init():
     # db_value = AutoScaleDB(
     #     cpu_max=70,
@@ -167,3 +167,29 @@ def db_init():
     # print("Database is initialized")
 
     schedule.every(1).minutes.do(auto_scaler.auto_scaler())
+
+# Manually set the threshold and ratio for auto scaling, and save in database
+@app.route("/auto_scale_input", methods=['GET', 'POST'])
+def auto_scale():
+    if request.method == 'POST':
+        threshold_max = request.form['threshold_max']
+        threshold_min = request.form['threshold_min']
+        ratio_expand = request.form['ratio_expand']
+        ratio_shrink = request.form['ratio_shrink']
+
+        u1 = AutoScaleDB(cpu_max=threshold_max,
+                         cpu_min=threshold_min,
+                         ratio_expand=ratio_expand,
+                         ratio_shrink=ratio_shrink)
+        db.session.add(u1)
+        db.session.commit()  # add to the database
+
+        return render_template("auto_scale_input.html", success = True)
+    else:
+        return render_template("auto_scale_input.html")
+
+# Display DNS of Load Balancer
+@app.route('/DNSloadbalancer')
+def DNSloadbalancer():
+    print('The DNS name of the load balancer is displayed...')
+    return render_template("DNSloadbalancer.html")

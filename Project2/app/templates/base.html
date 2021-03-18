@@ -43,7 +43,12 @@ li a:hover:not(.active) {
             <li class="nav-item" id="nav-numberofworkers">
                 <a class="nav-link" href="{{ url_for('worker_list') }}">Worker List <span class="sr-only">(current)</span></a>
             </li>
-
+            <li class="nav-item" id="nav-numberofworkers">
+                <a class="nav-link" href="{{ url_for('auto_scale') }}">Auto Scale <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item" id="nav-numberofworkers">
+                <a class="nav-link" href="{{ url_for('DNSloadbalancer') }}">Load Balancer <span class="sr-only">(current)</span></a>
+            </li>
         </ul>
         {% if 'user' in session %}
         <img class='img-small' src="static/img/user-outline.svg"/>
