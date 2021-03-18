@@ -22,17 +22,17 @@ tag_specifications_allen = [{
 ################################
 
 # balancer
-arn = 'arn:aws:elasticloadbalancing:us-east-1:411033800461:loadbalancer/app/loadbalancer/36142359a6458967'
-dns = 'loadbalancer-1947271922.us-east-1.elb.amazonaws.com'
-target_arn = 'arn:aws:elasticloadbalancing:us-east-1:411033800461:targetgroup/1779lb/76c209c218e6fc76'
-target_group_dimension = 'targetgroup/1779lb/76c209c218e6fc76'
-ELB_dimension = 'app/loadbalancer/36142359a6458967'
+arn = 'arn:aws:elasticloadbalancing:us-east-1:411033800461:loadbalancer/app/load-balancer-1/254882bfbf58fc6e'#'arn:aws:elasticloadbalancing:us-east-1:411033800461:loadbalancer/app/loadbalancer/36142359a6458967'
+dns =  'load-balancer-1-1434705320.us-east-1.elb.amazonaws.com' #'loadbalancer-1947271922.us-east-1.elb.amazonaws.com'
+target_arn = 'arn:aws:elasticloadbalancing:us-east-1:411033800461:targetgroup/1779lb1/35b8955c88fb5be1'#'arn:aws:elasticloadbalancing:us-east-1:411033800461:targetgroup/1779lb/76c209c218e6fc76'
+target_group_dimension = 'targetgroup/1779lb1/35b8955c88fb5be1'#'targetgroup/1779lb/76c209c218e6fc76'
+ELB_dimension = 'app/load-balancer-1/254882bfbf58fc6e' #'app/loadbalancer/36142359a6458967'
 
 # S3
 s3_name = 'bucket1779'
 
 # Variable for creating an instance
-ImageId = 'ami-03b4f4239f819d507'
+ImageId =  'ami-0cf5fc8b139494295'# 'ami-03b4f4239f819d507'
 KeyName = 'ece1779-manager'
 user_tag = 'user'
 user_placement = 'usergroup'
@@ -41,7 +41,7 @@ manager_instance = 'i-0530347cfe20bd7ff'
 tag_specificatios = [{
     'ResourceType': 'instance',
     'Tags': [{'Key': 'Name', 'Value': user_tag}]}]
-placement = {'AvailabilityZone': 'us-east-1a', 'GroupName': user_placement}
+placement = {'AvailabilityZone': 'us-east-1f', 'GroupName': user_placement}
 security_group_Irene = 'launch-wizard-7'
 iam_instance_profile = {'Arn': 'arn:aws:iam::411033800461:instance-profile/full_s3_access_from_ec2'}
 user_data = '''Content-Type: multipart/mixed; boundary="//"
