@@ -2,6 +2,8 @@ from app import app, db
 from app.AutoScaleDB import AutoScaleDB
 from app import awsManager 
 from sqlalchemy import desc
+import schedule
+import time
 
 
 manager = awsManager.Manager()

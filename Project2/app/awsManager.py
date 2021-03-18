@@ -12,7 +12,6 @@ class Manager:
         self.cloudwatch = boto3.client('cloudwatch')
         self.s3 = boto3.resource('s3')
 
-
     # Get CPU utilization of the worker in past 30 min from cloudwatch
     def inst_CPU(self, inst_id):
         ec2 = boto3.resource('ec2')
@@ -49,7 +48,6 @@ class Manager:
         x_axis = list(range(1, 31))
         return x_axis, CPU_utl
 
-
     def avg_cpu(self, instances):
         cpu = []
         for instance in instances:
@@ -80,7 +78,6 @@ class Manager:
 
         return avg_cpu
 
-
     # Get HTTP request rate of the worker in past 30 min
     def inst_HTTP(self, inst_id):
         ec2 = boto3.resource('ec2')
@@ -93,6 +90,12 @@ class Manager:
             HTTP = watch.get_metric_statistics(
                 Namespace='AWS/ApplicationELB',
                 MetricName='RequestCountPerTarget',
+                # Dimensions=[
+                #     {
+                #         'Name': 'TargetGroup',
+                #         'Value': config.target_group_dimension_allen
+                #     },
+                # ],
                 Dimensions=[
                     {
                         'Name': 'TargetGroup',
@@ -114,7 +117,6 @@ class Manager:
 
             x_axis = list(range(1, 31))
         return x_axis, http_rate
-    
 
     # Count the number of workers in past 30 minutes
     def number_workers(self):
@@ -126,9 +128,19 @@ class Manager:
         inst_num = []  # A list to store number of workers in past 30 min
 
         for times in range(0, 30):
-            NUM_INSTANCES = watch.get_metric_statistics(
+            inst_number = watch.get_metric_statistics(
                 Namespace='AWS/ApplicationELB',
                 MetricName='HealthyHostCount',
+                # Dimensions=[
+                #     {
+                #         'Name': 'TargetGroup',
+                #         'Value': config.target_group_dimension_allen
+                #     },
+                #     {
+                #         'Name': 'LoadBalancer',
+                #         'Value': config.ELB_dimension_allen  # view metrics -> source
+                #     }
+                # ],
                 Dimensions=[
                     {
                         'Name': 'TargetGroup',
@@ -144,8 +156,9 @@ class Manager:
                 Period=60,
                 Statistics=['Average']
             )
-
-            for data in NUM_INSTANCES['Datapoints']:
+            print('KKKKK test', inst_number)
+            for data in inst_number['Datapoints']:
+                print('data test', data)
                 inst_count = int(data['Average'])  # Save the count number as an integer
                 inst_num.append(inst_count)
 
@@ -153,29 +166,42 @@ class Manager:
             end -= 1
 
         x_axis = list(range(0, len(inst_num)))
+        print('X test', x_axis)
+        print('Y test', inst_num)
 
         return x_axis, inst_num
-    
 
     # Create a ec2 instance
     def create_new_instance(self):
         try:
             response = self.ec2.create_instances(
-                ImageId = config.ImageId,
-                MinCount = 1,
-                MaxCount = 1,
-                InstanceType = 't2.large',
-                KeyName = config.KeyName,
-                Monitoring = {'Enabled': True},
-                TagSpecifications = config.tag_specificatios,
-                Placement = config.placement,
-                SecurityGroups = [config.security_group_Irene],
-                IamInstanceProfile = config.iam_instance_profile,
-                UserData = config.user_data
+                # ImageId=config.image_id,
+                # MinCount=1,
+                # MaxCount=1,
+                # InstanceType='t2.medium',
+                # KeyName=config.key_pair,
+                # Monitoring={'Enabled': True},
+                # TagSpecifications=config.tag_specifications_allen,
+                # Placement=config.placement_allen,
+                # SecurityGroups=[config.security_group_allen],
+                # IamInstanceProfile=config.iam_arn_allen,
+                # UserData=config.user_data
+                ImageId=config.ImageId,
+                MinCount=1,
+                MaxCount=1,
+                InstanceType='t2.large',
+                KeyName=config.KeyName,
+                Monitoring={'Enabled': True},
+                TagSpecifications=config.tag_specificatios,
+                Placement=config.placement,
+                SecurityGroups=[config.security_group_Irene],
+                IamInstanceProfile=config.iam_instance_profile,
+                UserData=config.user_data
 
             )
             new_instance = response[0]
 
+            print('Adding new instance ', new_instance, '...')
             # Wait for state to change before register it to a target group
             new_instance.wait_until_running(
                 Filters=[
@@ -185,7 +211,7 @@ class Manager:
                     }
                 ]
             )
-            print("wait until running")
+            print("wait until running...")
             new_instance.reload()
 
             # Register to a target group
@@ -203,33 +229,34 @@ class Manager:
         except ClientError as e:
             print(e)
 
-
-
     # Get all user instances
     # State could be : running, pending, stopped, etd ...
     def get_user_instances(self, state):
         # Look for all user instances that satisfy the conditions
         responses = self.ec2.instances.filter(
             Filters=[{'Name': 'placement-group-name',
-                      'Values': [config.user_placement]
+                      'Values': [config.user_placement] # worker group
                       },
                      {
                          'Name': 'instance-state-name',
                          'Values': [state]
                      },
                      {'Name': 'image-id',
-                      'Values': [config.ImageId]}
+                      'Values': [config.image_id]}
                      ]
         )
 
         return responses
 
-
     # Register an ec2 instance to destinated target group
     def register_to_target_group(self, instance):
         response = self.elb.register_targets(
+            # TargetGroupArn=config.target_group_arn_allen,
+            # Targets=[{
+            #     'Id': instance.id
+            # }])
             TargetGroupArn=config.target_arn,
-            Targets= [{
+            Targets=[{
                 'Id': instance.id
             }])
 
@@ -242,10 +269,14 @@ class Manager:
             print("Register targets failed!")
             return -1
 
-
-
     def remove_instance(self, instanceId):
         response = self.elb.deregister_targets(
+            # TargetGroupArn=config.target_group_arn_allen,
+            # Targets=[
+            #     {
+            #         'Id': instanceId,
+            #     },
+            # ]
             TargetGroupArn=config.target_arn,
             Targets=[
                 {
@@ -270,15 +301,24 @@ class Manager:
         print('Our worker pool has', len(instance_id), "instances running currently")
         # TODO:  catch exception
 
-
     # Unregister an instance from the target group
     def unregister_from_target_group(self, instanceId):
 
         # Wait for deregister
         waiter = self.elb.get_waiter('target_deregistered')
         waiter.wait(
-            TargetGroupArn = config.target_arn,
-            Targets = [
+            # TargetGroupArn=config.target_group_arn_allen,
+            # Targets=[
+            #     {
+            #         'Id': instanceId
+            #     },
+            # ],
+            # WaiterConfig={
+            #     'Delay': 15,
+            #     'MaxAttempts': 40
+            # }
+            argetGroupArn=config.target_arn,
+            Targets=[
                 {
                     'Id': instanceId
                 },
@@ -290,9 +330,6 @@ class Manager:
         )
 
         print("Instance id " + instanceId + " is deregistered")
-
-
-
 
     def get_healthy_ids(self):
         running_ids = []
@@ -318,7 +355,6 @@ class Manager:
 
         return healthy_ids
 
-
     # Increase worker based on ratio
     def increase_worker(self, ratio, num_instance, max_instance):
         num_increase = int(num_instance * ratio - num_instance)
@@ -330,7 +366,6 @@ class Manager:
 
         for i in range(num_increase):
             self.create_new_instance()
-
 
     # Decrase worker by ratio
     def decrease_worker(self, ratio, instance_ids, num_instance, min_instance):
@@ -369,8 +404,6 @@ class Manager:
         bucket = self.s3.Bucket(config.s3_name)
         bucket.objects.all().delete()
         print("S3 data are deleted")
-        return
-
 
 
 

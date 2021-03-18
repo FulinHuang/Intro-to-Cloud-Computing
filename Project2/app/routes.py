@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, url_for, redirect
+from flask import render_template, url_for, redirect, request
 from app import app, db
 from app.AutoScaleDB import AutoScaleDB
 from app import awsManager
@@ -11,12 +11,15 @@ from app import config
 from datetime import datetime, timedelta
 import time
 import requests
-import schedule
+import atexit
+from apscheduler.schedulers.background import BackgroundScheduler
 from sqlalchemy import desc
 
 
 awsmanager = awsManager.Manager()
-
+scheduler = BackgroundScheduler()
+scheduler.daemonic = False
+atexit.register(lambda: scheduler.shutdown())
 
 
 # Worker list page: select each running instance and show the details in worker_list.html
@@ -31,7 +34,6 @@ def worker_list():
 @app.route('/home')
 def home():
     plt.switch_backend('agg') #Allen - resolve plt runtime error
-    #    x_axis, inst_num = 5, 5 #test
     x_axis, inst_num = awsmanager.number_workers()
     plt.plot(x_axis, inst_num, marker='+')
     plt.xlabel('Time (minutes)', fontsize=10)
@@ -124,9 +126,10 @@ def decrease_workers():
 
 @app.route('/terminate_all')
 def terminate_all():
-
     # Stop scheduling
-    cancel_job()
+    jobs = scheduler.get_jobs()
+    jobs[0].remove()
+
 
     # Terminate all workers and stop manager
     awsmanager.terminate_all()
@@ -172,6 +175,7 @@ def auto_check():
         print('Our worker pool has 1 instance running currently, initiating done.')
 
 
+
 # Initialize the database & start auto-scaler before launching the website
 @app.before_first_request
 def db_init():
@@ -187,16 +191,33 @@ def db_init():
         db.session.commit()
         print("Database is initialized")
 
-
-    schedule.every(1).minutes.do(auto_scaler.auto_scaler)
-    print("Start Scheduling")
-
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+    scheduler.add_job(auto_scaler.auto_scaler, trigger='interval', minutes=1, max_instances=60)
+    scheduler.start()
 
 
-# =========== Helpers ===========
-def cancel_job():
-    print("Cancel job")
-    return schedule.CancelJob
+# Manually set the threshold and ratio for auto scaling, and save in database
+@app.route("/auto_scale_input", methods=['GET', 'POST'])
+def auto_scale():
+    if request.method == 'POST':
+        threshold_max = request.form['threshold_max']
+        threshold_min = request.form['threshold_min']
+        ratio_expand = request.form['ratio_expand']
+        ratio_shrink = request.form['ratio_shrink']
+
+        u1 = AutoScaleDB(cpu_max=threshold_max,
+                         cpu_min=threshold_min,
+                         ratio_expand=ratio_expand,
+                         ratio_shrink=ratio_shrink)
+        db.session.add(u1)
+        db.session.commit()  # add to the database
+
+        return render_template("auto_scale_input.html", success = True)
+    else:
+        return render_template("auto_scale_input.html")
+
+# Display DNS of Load Balancer
+@app.route('/DNSloadbalancer')
+def DNSloadbalancer():
+    print('The DNS name of the load balancer is displayed...')
+    return render_template("DNSloadbalancer.html")
+
