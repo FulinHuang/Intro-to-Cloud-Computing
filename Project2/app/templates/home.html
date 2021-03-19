@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content-section" style="position:relative;top:150px;" >
+    <center> <h4 style="margin-left:20px;">Number of Workers in the Past 30 Minutes</h4></center>
+
+    <div class="container">
+<div class="content-section" >
+
+ <header class="jumbotron bg-dark text-white" >
+    <div class="container text-center">
+            <hr style="height:1px;border:none" />
+            {% if instance_num != None %}
+            <img src="data:image/png;base64,{{ instance_num }}" style="width:800px;height:600px;">
+            {% endif %}
+        </div>
+    </div>
+</header>
+</div>
+    </div>
+{% endblock content %}

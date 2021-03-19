@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="content-section" style="position:relative;top:150px;" >
+    <center> <h4 style="margin-left:20px;">Change Worker Pool Size</h4></center>
+    <div class="container">
+
+<table class="table" style="position:relative;top:50px;" >
+  <thead class="table-dark">
+    <tr>
+      <th scope="col"><center>Grow the Worker Pool Size</center></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+          <center>
+           <button type="button" class="btn btn-success"
+                    style=" width:150px" onclick="window.location.href='{{url_for('increase_workers')}}';" >
+             Increase
+
+           </button>
+          </center>
+      </td>
+    </tr>
+
+  <thead class="table-dark">
+    <tr >
+      <th scope="col"><center>Shrink the Worker Pool Size</center> </th>
+    </tr>
+     </thead>
+    <tr>
+      <td>
+          <center>
+          <button type="button" class="btn btn-warning"
+                style="width:150px" onclick="window.location.href='{{url_for('decrease_workers')}}';">
+            Decrease
+        </button>
+          </center>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+     </div>
+
+
+</div>
+{% endblock content %}
