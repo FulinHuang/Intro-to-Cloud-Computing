@@ -5,16 +5,16 @@ arn = 'arn:aws:elasticloadbalancing:us-east-1:489711376857:loadbalancer/app/a2Lo
 dns = 'a2LoadBalancer-472858139.us-east-1.elb.amazonaws.com'
 target_arn = 'arn:aws:elasticloadbalancing:us-east-1:489711376857:targetgroup/workerpool5000/2a590f2f6b003750'
 target_group_dimension = 'targetgroup/workerpool5000/2a590f2f6b003750'
-ELB_dimension = 'app/a2LoadBalancer/2fdf1cd188e91767'
+ELB_dimension = 'app/a2LoadBalancer/2fdf1cd188e91767' # worker list filter
 
 # S3
 s3_name = 'ece1779yw'
 
 # Variable for creating an instance
-ImageId = 'ami-0cf5fc8b139494295'
+ImageId = 'ami-0cf5fc8b139494295' # worker creation
 KeyName = 'ece1779a1aij'
 user_tag = 'user'
-user_placement = 'a2user'
+user_placement = 'a2user' # worker list filter, user creation
 
 manager_tag = 'manager'
 manager_instance = 'ami-0cf5fc8b139494295'
