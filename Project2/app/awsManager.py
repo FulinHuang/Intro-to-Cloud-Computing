@@ -35,7 +35,6 @@ class Manager:
                 Period=30,  # Every 60 sec get once data
                 Statistics=['Average']
             )
-            print('***CPU info:', CPU)
             # Time interval shifts by 1 min
             start -= 1
             end -= 1
@@ -107,7 +106,6 @@ class Manager:
                 Period=30,
                 Statistics=['Sum']
             )
-            print('**HTTP info:', HTTP)
             start -= 1
             end -= 1
             http_count = 0  # Initialize HTTP request of each 1 min
@@ -156,7 +154,6 @@ class Manager:
                 Period=60,
                 Statistics=['Average']
             )
-            print('KKKKK test', inst_number)
             for data in inst_number['Datapoints']:
                 print('data test', data)
                 inst_count = int(data['Average'])  # Save the count number as an integer
@@ -242,7 +239,7 @@ class Manager:
                          'Values': [state]
                      },
                      {'Name': 'image-id',
-                      'Values': [config.image_id]}
+                      'Values': [config.ImageId]}
                      ]
         )
 
@@ -317,7 +314,7 @@ class Manager:
             #     'Delay': 15,
             #     'MaxAttempts': 40
             # }
-            argetGroupArn=config.target_arn,
+            TargetGroupArn=config.target_arn,
             Targets=[
                 {
                     'Id': instanceId
@@ -382,7 +379,6 @@ class Manager:
 
 
     def terminate_all(self):
-
         # Stop all workers
         instances = self.get_user_instances('running')
         inst_id = []

@@ -31,10 +31,12 @@ def auto_scaler():
     min_instance = 1
 
     if avg_threshold > autoDb.cpu_max and num_instance < max_instance:
+        print("threshold larger than cpu max ")
         manager.increase_worker(autoDb.ratio_expand, num_instance, max_instance)
 
 
     elif avg_threshold < autoDb.cpu_min and num_instance > min_instance:
+        print("threshold smaller than cpu min")
         manager.decrease_worker(autoDb.ratio_shrink, instance_ids, num_instance, min_instance)
 
     else:
