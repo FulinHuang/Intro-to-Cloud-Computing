@@ -69,8 +69,8 @@ def logout():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if True: #current_user.is_authenticated:
-        if False: #current_user.get_username() != 'admin':
+    if current_user.is_authenticated:
+        if current_user.get_username() != 'admin':
             flash('Only Admin can register new account, please login if you are Admin')
             return redirect(url_for('login'))
         else:
