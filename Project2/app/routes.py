@@ -7,6 +7,7 @@ from app.AutoScaleDB import AutoScaleDB
 from app import awsManager
 from app import auto_scaler
 import matplotlib.pyplot as plt
+from matplotlib.dates import DateFormatter
 import io
 import base64
 from app import config
@@ -37,10 +38,16 @@ def worker_list():
 @app.route('/home')
 def home():
     plt.switch_backend('agg') #Allen - resolve plt runtime error
-    x_axis, inst_num = awsmanager.number_workers()
-    plt.plot(x_axis, inst_num, marker='+')
-    plt.xlabel('Time (minutes)', fontsize=10)
+    x_axis, inst_num = awsmanager.number_workers() #x-axis sample:  datetime.datetime(2021, 3, 20, 15, 18, tzinfo=tzutc())
+
+    #create the plot
+    formatter = DateFormatter('%H:%M') # example '%Y-%m-%d %H:%M:%S'
+    fig, ax = plt.subplots()
+    plt.plot_date(x_axis, inst_num, marker='*', linestyle='-')
+    plt.xlabel('Time', fontsize=10)
     plt.ylabel('Instance number', fontsize=10)
+    ax.xaxis.set_major_formatter(formatter)
+    ax.set_xlim([datetime.utcnow() - timedelta(hours=4.6), datetime.utcnow()- timedelta(hours=4)])
     buf = io.BytesIO()
     plt.savefig(buf, format='png')
     plt.close()
@@ -57,9 +64,15 @@ def view(instance_id):
     plt.switch_backend('agg') #Allen - resolve plt runtime error
     time_list, cpu_list = awsmanager.inst_CPU(instance_id)
     list_time, http_list = awsmanager.inst_HTTP(instance_id)
-    plt.plot(time_list, cpu_list, 'k', marker='+')
-    plt.xlabel('Time (minutes)', fontsize=10)
+    # plot for CPU UTIL
+    formatter = DateFormatter('%H:%M') # example '%Y-%m-%d %H:%M:%S'
+    fig, ax = plt.subplots()
+    plt.plot_date(time_list, cpu_list, marker='*', linestyle='-')
+    #plt.plot(time_list, cpu_list, 'k', marker='+')
+    plt.xlabel('Time', fontsize=10)
     plt.ylabel('CPU utilization (%)', fontsize=10)
+    ax.xaxis.set_major_formatter(formatter)
+    ax.set_xlim([datetime.utcnow() - timedelta(hours=4.6), datetime.utcnow() - timedelta(hours=4)])
     buf_CPU = io.BytesIO()
     plt.savefig(buf_CPU, format='png')
     plt.close()
@@ -67,7 +80,7 @@ def view(instance_id):
     buffer = b''.join(buf_CPU)
     b2 = base64.b64encode(buffer)
     CPU_img = b2.decode('utf-8')
-
+    # plot for HTTP REQ
     plt.plot(list_time, http_list, 'k', marker='+')
     plt.xlabel('Time (minutes)', fontsize=10)
     plt.ylabel('Http request(Count)', fontsize=10)
