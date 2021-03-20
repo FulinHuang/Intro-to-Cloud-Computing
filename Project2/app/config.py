@@ -83,7 +83,7 @@ ELB_dimension = 'app/a2LoadBalancer/2fdf1cd188e91767'
 s3_name = 'ece1779yw'
 
 # Variable for creating an instance
-ImageId = 'ami-0cf5fc8b139494295' # worker creation
+ImageId = 'ami-0bd432867d78ea1f8' # 'ami-0cf5fc8b139494295' # worker creation
 KeyName = 'ece1779a1aij'
 user_tag = 'user'
 user_placement = 'a2user' # worker list filter, user creation
