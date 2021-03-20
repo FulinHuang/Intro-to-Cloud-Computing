@@ -19,6 +19,7 @@ import boto3
 import requests
 import numpy as np
 import io
+from PIL import Image
 
 useAWSs3 = True # True: use AWS S3; False: use folder static as storage...
 
@@ -351,10 +352,18 @@ def upload_test():
                     "message": message
                 }
             })
-
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        file.save(filepath)
-        num_face, num_mask, num_unmask = mask_detection(filepath, filename)
+        # modification 3/19
+        if useAWSs3:
+            s3_client = boto3.client('s3')
+            s3_client.put_object(ACL='public-read',
+                                 Bucket=app.config['BUCKET_NAME'],
+                                 Key=app.config['BUCKET_UPLOAD_FOLDER'] + '/' + filename,
+                                 Body=file)
+            num_face, num_mask, num_unmask = mask_detection_s3(filename)
+        else:
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(filepath)
+            num_face, num_mask, num_unmask = mask_detection(filepath, filename)
         return jsonify(
             {
                 "success": True,
@@ -420,6 +429,15 @@ def mask_detection_s3(unique_name):
                              Bucket=app.config['BUCKET_NAME'],
                              Key=app.config['BUCKET_OUTPUT_FOLDER'] + '/' + unique_name,
                              Body=output.getvalue())
+
+        # upload the thumbnails
+    with io.BytesIO() as output:
+        output_image.thumbnail((120,120))
+        output_image.save(output, format="JPEG")
+        s3_client.put_object(ACL='public-read',
+                            Bucket=app.config['BUCKET_NAME'],
+                            Key=app.config['BUCKET_THUMBNAILS_FOLDER'] + '/' + unique_name,
+                            Body=output.getvalue())
 
     # collect face/mask identification results
     num_mask = 0
