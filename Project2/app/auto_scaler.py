@@ -9,13 +9,8 @@ from datetime import datetime
 manager = awsManager.Manager()
 
 def get_data():
-    # autoDb = AutoScaleDB.query.order_by(desc(AutoScaleDB.id)).first()
-    db.session.commit()
+    db.session.commit()  # update the database, otherwise we cannot get the latest value
     autoDb = db.session.query(AutoScaleDB).order_by(AutoScaleDB.id.desc()).first()
-
-
-    # autoDb = AutoScaleDB.query.order_by(AutoScaleDB.timestamp).first()
-    print(autoDb.id, autoDb.cpu_max, autoDb.cpu_min, autoDb.ratio_expand, autoDb.ratio_shrink)
     return autoDb
 
 
@@ -40,7 +35,7 @@ def auto_scaler():
     max_instance = 8
     min_instance = 1
 
-    print("There are {} running instances".format(num_instance))
+    print(datetime.now(), " There are {} running instances".format(num_instance))
 
     if valid:
 
