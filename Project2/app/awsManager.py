@@ -19,6 +19,7 @@ class Manager:
         instance = self.ec2.Instance(inst_id)  # Identify the instance by ID
 
         CPU_utl = []  # A list to store CPU utilization in past 30 min
+        time_stamps = [] # time stamps for the CPU_utl
         time_point = datetime.utcnow()
         time_period = 30 # 30 minutes
         CPU = self.cloudwatch.get_metric_statistics(
@@ -35,12 +36,17 @@ class Manager:
             Period=60,  # Every 60 sec get once data
             Statistics=['Average']
         )
-        for data_point in CPU['Datapoints']:
+        # sort the data points in timely order.
+        all_points = sorted(CPU['Datapoints'], key=lambda k: k.get('Timestamp'), reverse=False)
+        print(all_points)
+        # Save the count number into inst_num as an integer
+        for data_point in all_points:
             CPU_utl.append(round(data_point['Average'], 2))
-        x_axis = list(range(0, len(CPU_utl)))
-        print(len(x_axis))
+            time_stamps.append(data_point['Timestamp']-timedelta(hours=4))
+
+        # x_axis = list(range(0, len(CPU_utl))) #obsolete
         # print('awsManager: the cpu utilization history is complete.')
-        return x_axis, CPU_utl
+        return time_stamps, CPU_utl
 
     def avg_cpu(self, instances):
         cpu = []
@@ -106,6 +112,7 @@ class Manager:
         time_point = datetime.utcnow()
         time_period = 30 # data for 30 minutes
         inst_num = []  # A list to store number of workers in past 30 min
+        time_stamps = [] #A ist to store time stamps of the history
 
         inst_number = self.cloudwatch.get_metric_statistics(
             Namespace='AWS/ApplicationELB',
@@ -123,20 +130,23 @@ class Manager:
             StartTime=time_point - timedelta(seconds=time_period * 60),
             EndTime=time_point,
             Period=60,
-            Statistics=['Average']
+            Statistics=['Average'],
             )
+        # sort the data points in timely order.
+        all_points = sorted(inst_number['Datapoints'], key=lambda k: k.get('Timestamp'), reverse=False)
         # Save the count number into inst_num as an integer
-        for data_point in inst_number['Datapoints']:
+        for data_point in all_points:
             inst_num.append(int(data_point['Average']))
+            time_stamps.append(data_point['Timestamp']-timedelta(hours=4))
 
-        x_axis = list(range(0, len(inst_num)))
+        # x_axis = list(range(0, len(inst_num))) #plot x-axis, obsolete
 
-        print("Instance number ", inst_number)
+        # print("Instance number ", inst_number)
         # print('X test', x_axis)
         # print('Y test', inst_num)
         # print('awsManager: worker number history complete.')
 
-        return x_axis, inst_num
+        return time_stamps, inst_num
 
     # Create a ec2 instance
     def create_new_instance(self):
