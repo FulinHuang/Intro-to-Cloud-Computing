@@ -40,7 +40,6 @@ class Manager:
             end -= 1
             utilization = 0  # Initialize utilization of each 1 min
             for data in CPU['Datapoints']:
-                print('***Datapoints:', data)
                 utilization = round(data['Average'], 2)  # Round off the float, keep 2 digits
             CPU_utl.append(utilization)  # Contain 30 CPU utilzations values
 
@@ -70,10 +69,8 @@ class Manager:
                 data_avg = data['Average']
                 cpu.append(data_avg)
 
-        if len(cpu) != 0:
-            avg_cpu = sum(cpu) / len(cpu)
-        else:
-            avg_cpu = sum(cpu)
+
+        avg_cpu = sum(cpu) / len(cpu)
 
         return avg_cpu
 
@@ -155,7 +152,6 @@ class Manager:
                 Statistics=['Average']
             )
             for data in inst_number['Datapoints']:
-                print('data test', data)
                 inst_count = int(data['Average'])  # Save the count number as an integer
                 inst_num.append(inst_count)
 
@@ -163,8 +159,6 @@ class Manager:
             end -= 1
 
         x_axis = list(range(0, len(inst_num)))
-        print('X test', x_axis)
-        print('Y test', inst_num)
 
         return x_axis, inst_num
 
@@ -281,6 +275,7 @@ class Manager:
                 },
             ]
         )
+        print("Removing an instance")
         print(response)
 
         # Unregister an instance from the target group
@@ -350,7 +345,32 @@ class Manager:
             if response['TargetHealthDescriptions'][0]['TargetHealth']['State'] == 'healthy':
                 healthy_ids.append(instanceId)
 
-        return healthy_ids
+        return healthy_ids, running_ids
+
+    def valid_for_autoscale(self):
+        healthy_ids, running_ids  = self.get_healthy_ids()
+        pending_ids = []
+        stopping_ids = []
+        pending_instances = self.get_user_instances('pending')
+        stopping_instances = self.get_user_instances('stopping')
+
+        for instance in pending_instances:
+            pending_ids.append(instance)
+
+        for instance in stopping_instances:
+            stopping_ids.append(instance)
+
+        if len(pending_ids) > 0 or len(stopping_ids) > 0:
+            print("There are more than one pending/stopping instance")
+            return False
+        elif len(healthy_ids) != len(running_ids):
+            print("# Healthy instances not equal to # running instances")
+            return False
+        else:
+            return True
+
+
+
 
     # Increase worker based on ratio
     def increase_worker(self, ratio, num_instance, max_instance):
@@ -368,12 +388,14 @@ class Manager:
     def decrease_worker(self, ratio, instance_ids, num_instance, min_instance):
         num_decrease = int(num_instance - num_instance * ratio)
         if num_decrease < 0:
-            num_decrease = 0
+            print("Cannot decrease worker")
+            return
 
         if num_instance - num_decrease < min_instance:
             num_decrease = num_instance - min_instance
 
         remove_id = instance_ids[:num_decrease]
+        print("remove ids are ", remove_id)
         for id in remove_id:
             self.remove_instance(id)
 

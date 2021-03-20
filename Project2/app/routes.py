@@ -88,11 +88,17 @@ def worker_control():
 
 @app.route('/increase_workers', methods=['GET', 'POST'])
 def increase_workers():
-    instance_ids = []
+    running_ids = []
+    pending_ids = []
     running_instances = awsmanager.get_user_instances('running')
+    pending_instances = awsmanager.get_user_instances('pending')
+
     for instance in running_instances:
-        instance_ids.append(instance.id)
-    num_instance = len(instance_ids)
+        running_ids.append(instance.id)
+    for instance in pending_instances:
+        pending_ids.append(instance.id)
+
+    num_instance = len(running_ids) + len(pending_ids)
     max_instance = 8
 
     if num_instance < max_instance:
@@ -182,8 +188,8 @@ def db_init():
     value = AutoScaleDB.query.order_by(desc(AutoScaleDB.id)).first()
     if value is None:
         db_value = AutoScaleDB(
-            cpu_max=70,
-            cpu_min=20,
+            cpu_max=80,
+            cpu_min=10,
             ratio_expand=2,
             ratio_shrink=0.5,
             timestamp=datetime.now())
