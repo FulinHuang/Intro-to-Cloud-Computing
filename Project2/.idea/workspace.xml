@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="beb9d699-2eff-4f5e-9096-8f1fffb3fe2b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/delete_data.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/terminate_all.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/awsManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/awsManager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/DNSloadbalancer.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/DNSloadbalancer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/auto_scale_input.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/auto_scale_input.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -174,7 +179,7 @@
       <recent name="C:\ece\A2_Allen\Intro-to-Cloud-Computing\Project2\app" />
     </key>
   </component>
-  <component name="RunManager" selected="Flask server.Project2">
+  <component name="RunManager" selected="Python.run">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="Project2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -238,7 +243,6 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Flask server.Project2" />
       <item itemvalue="Python.run" />
     </list>
   </component>

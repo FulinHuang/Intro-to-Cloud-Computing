@@ -2,7 +2,7 @@ import boto3
 from app import config
 from botocore.exceptions import ClientError
 from datetime import datetime, timedelta
-
+import time
 
 class Manager:
 
@@ -158,9 +158,9 @@ class Manager:
                 InstanceType='t2.large',
                 KeyName=config.KeyName,
                 Monitoring={'Enabled': True},
-                TagSpecifications=config.tag_specificatios,
+                TagSpecifications=config.tag_specifications,
                 Placement=config.placement,
-                SecurityGroups=[config.security_group_Irene],
+                SecurityGroups=[config.security_group],
                 IamInstanceProfile=config.iam_instance_profile,
                 UserData=config.user_data
 
@@ -259,6 +259,8 @@ class Manager:
         self.ec2.instances.filter(InstanceIds=[instanceId]).terminate()
         print("Instance i " + instanceId + " is terminated")
 
+        time.sleep(20)  # Delay for 20 seconds.
+
         instances = self.get_user_instances("running")
         instance_id = []
         for instance in instances:
@@ -347,17 +349,17 @@ class Manager:
 
 
     def terminate_all(self):
-
         # Stop all workers
         instances = self.get_user_instances('running')
         inst_id = []
         for instance in instances:
             inst_id.append(instance.id)
-        print("There are ", len(inst_id), " running instances")
+        print("Currently there are ", len(inst_id), " running instances")
 
-        for i in range(1, len(inst_id)):
-            self.remove_instance(inst_id[i])
-            print('This woker instance: {} has been removed successfully.'.format(inst_id[i]))
+        for id in inst_id:
+            print("We are removing instance", id, "...")
+            self.remove_instance(id)
+            print('This worker instance: {} has been removed successfully.'.format(id))
 
         # Stop manager
         manager_instance = self.ec2.instances.filter(InstanceIds=[config.manager_instance])
