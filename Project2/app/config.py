@@ -1,26 +1,3 @@
-import os
-
-############ALLEN#############
-image_id = 'ami-0a1a1906efbd4c711'
-key_pair = 'Allen_A2_User1'
-security_group_allen = 'launch-wizard-1'
-worker_group = 'User_group_2'  # placement group for workers
-worker_group_2 = 'usergroup'  # placement group for workers
-manager_group = 'managergroup'  # placement group for managers
-
-placement_allen = {'AvailabilityZone': 'us-east-1d', 'GroupName': worker_group}
-elb_arn = 'arn:aws:elasticloadbalancing:us-east-1:011441637402:loadbalancer/app/allena2ELB/5360f782e6428bc4'
-elb_dns = 'allena2ELB-168220349.us-east-1.elb.amazonaws.com'
-elb_name = 'allena2ELB'
-target_group_arn_allen = 'arn:aws:elasticloadbalancing:us-east-1:011441637402:targetgroup/allena2/c1b769c7b4575737'
-iam_arn_allen = {'Arn': 'arn:aws:iam::011441637402:instance-profile/full_S3_access_from_EC2'}
-target_group_dimension_allen = 'targetgroup/allena2/c1b769c7b4575737'
-ELB_dimension_allen = 'app/allena2ELB/5360f782e6428bc4'
-tag_specifications_allen = [{
-    'ResourceType': 'instance',
-    'Tags': [{'Key': 'Name', 'Value': 'Allen - add worker_0316'}]}]
-################################
-
 # # balancer
 # arn = 'arn:aws:elasticloadbalancing:us-east-1:411033800461:loadbalancer/app/load-balancer-1/254882bfbf58fc6e'#'arn:aws:elasticloadbalancing:us-east-1:411033800461:loadbalancer/app/loadbalancer/36142359a6458967'
 # dns =  'load-balancer-1-1434705320.us-east-1.elb.amazonaws.com' #'loadbalancer-1947271922.us-east-1.elb.amazonaws.com'
@@ -83,19 +60,18 @@ ELB_dimension = 'app/a2LoadBalancer/2fdf1cd188e91767'
 s3_name = 'ece1779yw'
 
 # Variable for creating an instance
+
 ImageId = 'ami-0bd432867d78ea1f8' # 'ami-0cf5fc8b139494295' # worker creation
 KeyName = 'ece1779a1aij'
 user_tag = 'user'
 user_placement = 'a2user' # worker list filter, user creation
-
 manager_tag = 'manager'
-manager_instance = 'ami-0cf5fc8b139494295'
-
-tag_specificatios = [{
+manager_instance = 'i-0ed93f5bec9b7e654'
+tag_specifications = [{
 	'ResourceType': 'instance',
 	'Tags': [{'Key': 'Name', 'Value': user_tag}]}]
 placement = {'AvailabilityZone': 'us-east-1f', 'GroupName': user_placement}
-security_group_Irene = 'launch-wizard-3'
+security_group = 'launch-wizard-3'
 iam_instance_profile = {'Arn': 'arn:aws:iam::489711376857:instance-profile/S3_RDS_FULL'}
 user_data = '''Content-Type: multipart/mixed; boundary="//"
 MIME-Version: 1.0
@@ -121,6 +97,26 @@ cd /home/ubuntu/Desktop
 ./start.sh
 --//
 '''
+
+############ALLEN#############
+# KeyName = 'Allen_A2_User1'
+# security_group = 'launch-wizard-1'
+# manager_group = 'managergroup'  # placement group for # s
+# user_placement = 'User_group_2'
+# manager_instance = 'i-01b5e756977e484dd'
+# placement = {'AvailabilityZone': 'us-east-1d', 'GroupName': user_placement}
+# arn = 'arn:aws:elasticloadbalancing:us-east-1:011441637402:loadbalancer/app/allena2ELB/5360f782e6428bc4'
+# dns = 'allena2ELB-168220349.us-east-1.elb.amazonaws.com'
+# elb_name = 'allena2ELB'
+# target_arn = 'arn:aws:elasticloadbalancing:us-east-1:011441637402:targetgroup/allen0319/30a2474bf44efd6e'
+# iam_instance_profile = {'Arn': 'arn:aws:iam::011441637402:instance-profile/S3_RDS_FULL'}
+# target_group_dimension = 'targetgroup/allen0319/30a2474bf44efd6e'
+# ELB_dimension = 'app/allena2ELB/5360f782e6428bc4'
+# tag_specifications = [{
+#     'ResourceType': 'instance',
+#     'Tags': [{'Key': 'Name', 'Value': user_tag}]}]
+################################
+
 
 class Config(object):
     SECRET_KEY = 'ECE1779'

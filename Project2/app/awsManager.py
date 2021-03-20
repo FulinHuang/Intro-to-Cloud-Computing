@@ -2,7 +2,7 @@ import boto3
 from app import config
 from botocore.exceptions import ClientError
 from datetime import datetime, timedelta
-
+import time
 
 class Manager:
 
@@ -38,6 +38,7 @@ class Manager:
         for data_point in CPU['Datapoints']:
             CPU_utl.append(round(data_point['Average'], 2))
         x_axis = list(range(0, len(CPU_utl)))
+        print(len(x_axis))
         # print('awsManager: the cpu utilization history is complete.')
         return x_axis, CPU_utl
 
@@ -130,6 +131,7 @@ class Manager:
 
         x_axis = list(range(0, len(inst_num)))
 
+        print("Instance number ", inst_number)
         # print('X test', x_axis)
         # print('Y test', inst_num)
         # print('awsManager: worker number history complete.')
@@ -158,9 +160,9 @@ class Manager:
                 InstanceType='t2.large',
                 KeyName=config.KeyName,
                 Monitoring={'Enabled': True},
-                TagSpecifications=config.tag_specificatios,
+                TagSpecifications=config.tag_specifications,
                 Placement=config.placement,
-                SecurityGroups=[config.security_group_Irene],
+                SecurityGroups=[config.security_group],
                 IamInstanceProfile=config.iam_instance_profile,
                 UserData=config.user_data
 
@@ -260,6 +262,8 @@ class Manager:
         # Terminate instance by instanceId
         self.ec2.instances.filter(InstanceIds=[instanceId]).terminate()
         print("Instance i " + instanceId + " is terminated")
+
+        time.sleep(20)  # Delay for 20 seconds.
 
         instances = self.get_user_instances("running")
         instance_id = []
@@ -381,11 +385,12 @@ class Manager:
         inst_id = []
         for instance in instances:
             inst_id.append(instance.id)
-        print("There are ", len(inst_id), " running instances")
+        print("Currently there are ", len(inst_id), " running instances")
 
-        for i in range(1, len(inst_id)):
-            self.remove_instance(inst_id[i])
-            print('This woker instance: {} has been removed successfully.'.format(inst_id[i]))
+        for id in inst_id:
+            print("We are removing instance", id, "...")
+            self.remove_instance(id)
+            print('This worker instance: {} has been removed successfully.'.format(id))
 
         # Stop manager
         manager_instance = self.ec2.instances.filter(InstanceIds=[config.manager_instance])

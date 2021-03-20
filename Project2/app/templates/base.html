@@ -44,10 +44,16 @@ li a:hover:not(.active) {
                 <a class="nav-link" href="{{ url_for('worker_list') }}">Worker List <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item" id="nav-numberofworkers">
-                <a class="nav-link" href="{{ url_for('auto_scale') }}">Auto Scale <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{ url_for('auto_scale_input') }}">Auto Scale <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item" id="nav-numberofworkers">
                 <a class="nav-link" href="{{ url_for('DNSloadbalancer') }}">Load Balancer <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item" id="nav-numberofworkers">
+                <a class="nav-link" href="{{ url_for('stop_terminate') }}">Stop The Manager <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item" id="nav-numberofworkers">
+                <a class="nav-link" href="{{ url_for('remove_all_data') }}">Delete Data <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         {% if 'user' in session %}

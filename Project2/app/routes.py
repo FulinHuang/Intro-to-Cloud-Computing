@@ -1,6 +1,8 @@
 from app import app
 from flask import render_template, url_for, redirect, request
 from app import app, db
+from app.user import User
+from app.photo import Photo
 from app.AutoScaleDB import AutoScaleDB
 from app import awsManager
 from app import auto_scaler
@@ -14,6 +16,7 @@ import requests
 import atexit
 from apscheduler.schedulers.background import BackgroundScheduler
 from sqlalchemy import desc
+import boto3
 
 
 awsmanager = awsManager.Manager()
@@ -203,7 +206,7 @@ def db_init():
 
 # Manually set the threshold and ratio for auto scaling, and save in database
 @app.route("/auto_scale_input", methods=['GET', 'POST'])
-def auto_scale():
+def auto_scale_input():
     if request.method == 'POST':
         threshold_max = request.form['threshold_max']
         threshold_min = request.form['threshold_min']
@@ -213,7 +216,8 @@ def auto_scale():
         u1 = AutoScaleDB(cpu_max=threshold_max,
                          cpu_min=threshold_min,
                          ratio_expand=ratio_expand,
-                         ratio_shrink=ratio_shrink)
+                         ratio_shrink=ratio_shrink,
+                         timestamp=datetime.now())
         db.session.add(u1)
         db.session.commit()  # add to the database
 
@@ -227,3 +231,22 @@ def DNSloadbalancer():
     print('The DNS name of the load balancer is displayed...')
     return render_template("DNSloadbalancer.html")
 
+@app.route('/stop_terminate')
+def stop_terminate():
+    awsmanager.terminate_all()
+    print('The manager instance has stopped.')
+    return render_template("terminate_all.html")
+
+# Delete all user data in database and S3 bucket
+@app.route('/delete_data')
+def remove_all_data():
+    #awsmanager.clear_s3()
+    s3_resource = boto3.resource('s3')
+    bucket = s3_resource.Bucket(config.s3_name)
+    bucket.objects.all().delete()
+    # db.session.query(User).delete()
+    User.query.filter(User.username != 'admin').delete()
+    db.session.query(Photo).delete()
+    db.session.query(AutoScaleDB).delete()
+    db.session.commit()
+    return render_template("delete_data.html")

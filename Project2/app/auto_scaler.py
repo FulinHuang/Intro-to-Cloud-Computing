@@ -10,13 +10,18 @@ manager = awsManager.Manager()
 
 def get_data():
     autoDb = AutoScaleDB.query.order_by(desc(AutoScaleDB.id)).first()
+
+    # autoDb = AutoScaleDB.query.order_by(AutoScaleDB.timestamp).first()
+    print(autoDb.id, autoDb.cpu_max, autoDb.cpu_min, autoDb.ratio_expand, autoDb.ratio_shrink)
     return autoDb
 
 
 def auto_scaler():
     print("Running auto scaler")
 
-    autoDb = get_data()
+    autoDb = db.session.query(AutoScaleDB).order_by(AutoScaleDB.id.desc()).first()
+    print(autoDb.id, autoDb.cpu_max, autoDb.cpu_min, autoDb.ratio_expand, autoDb.ratio_shrink)
+
     instance_ids = []
 
     running_instances = manager.get_user_instances('running')

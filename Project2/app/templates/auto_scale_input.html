@@ -24,11 +24,11 @@
   cursor: pointer;
    }
     </style>
-    <header class="jumbotron my-4" style="position:relative;top:150px;>
+    <header class="jumbotron my-4" style="position:relative;top:150px">
     {% if success == True %}
     <div class="alert alert-success">Auto Scaler Updated</div>
     {% endif %}
-    <form method="post" action='/auto_scale'>
+    <form method="post" action="/auto_scale_input">
         <div class="form-group row ">
                 <div class="form-group col-md-12 ">
                   <label for="threshold_max">Threshold Max</label>
