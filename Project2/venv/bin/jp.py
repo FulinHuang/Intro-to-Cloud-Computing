@@ -1,4 +1,4 @@
-#!/Users/Huang/Desktop/UofT/ECE1779/Project/Project2/venv/bin/python3.8
+#!/Users/Huang/Desktop/UofT/ECE1779/Project/Project2/venv/bin/python3
 
 import sys
 import json

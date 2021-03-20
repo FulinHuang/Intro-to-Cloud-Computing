@@ -14,36 +14,31 @@ class Manager:
 
     # Get CPU utilization of the worker in past 30 min from cloudwatch
     def inst_CPU(self, inst_id):
-        ec2 = boto3.resource('ec2')
-        instance = ec2.Instance(inst_id)  # Identify the instance by ID
 
-        start = 31
-        end = 30  # the fist time interval is 31 to 30
+        # print('awsManager: loading the cpu utilization history of {}.'.format(inst_id))
+        instance = self.ec2.Instance(inst_id)  # Identify the instance by ID
+
         CPU_utl = []  # A list to store CPU utilization in past 30 min
-        for times in range(0, 30):
-            CPU = self.cloudwatch.get_metric_statistics(
-                Namespace='AWS/EC2',
-                MetricName='CPUUtilization',
-                Dimensions=[
-                    {
-                        'Name': 'InstanceId',
-                        'Value': instance.id
-                    },
-                ],
-                StartTime=datetime.utcnow() - timedelta(seconds=start * 60),
-                EndTime=datetime.utcnow() - timedelta(seconds=end * 60),
-                Period=30,  # Every 60 sec get once data
-                Statistics=['Average']
-            )
-            # Time interval shifts by 1 min
-            start -= 1
-            end -= 1
-            utilization = 0  # Initialize utilization of each 1 min
-            for data in CPU['Datapoints']:
-                utilization = round(data['Average'], 2)  # Round off the float, keep 2 digits
-            CPU_utl.append(utilization)  # Contain 30 CPU utilzations values
-
-        x_axis = list(range(1, 31))
+        time_point = datetime.utcnow()
+        time_period = 30 # 30 minutes
+        CPU = self.cloudwatch.get_metric_statistics(
+            Namespace='AWS/EC2',
+            MetricName='CPUUtilization',
+            Dimensions=[
+                {
+                    'Name': 'InstanceId',
+                    'Value': instance.id
+                },
+            ],
+            StartTime=time_point - timedelta(seconds=time_period * 60),
+            EndTime=time_point,
+            Period=60,  # Every 60 sec get once data
+            Statistics=['Average']
+        )
+        for data_point in CPU['Datapoints']:
+            CPU_utl.append(round(data_point['Average'], 2))
+        x_axis = list(range(0, len(CPU_utl)))
+        # print('awsManager: the cpu utilization history is complete.')
         return x_axis, CPU_utl
 
     def avg_cpu(self, instances):
@@ -69,8 +64,10 @@ class Manager:
                 data_avg = data['Average']
                 cpu.append(data_avg)
 
-
-        avg_cpu = sum(cpu) / len(cpu)
+        if len(cpu) == 0:
+            avg_cpu = sum(cpu)
+        else:
+            avg_cpu = sum(cpu) / len(cpu)
 
         return avg_cpu
 
@@ -78,93 +75,71 @@ class Manager:
     def inst_HTTP(self, inst_id):
         ec2 = boto3.resource('ec2')
         instance = ec2.Instance(inst_id)
-        watch = boto3.client('cloudwatch')
-        start = 31
-        end = 30  # fist time interval is 31 to 30
-        http_rate = []  # A list to store HTTP request rate in past 30 min
-        for times in range(0, 30):
-            HTTP = watch.get_metric_statistics(
-                Namespace='AWS/ApplicationELB',
-                MetricName='RequestCountPerTarget',
-                # Dimensions=[
-                #     {
-                #         'Name': 'TargetGroup',
-                #         'Value': config.target_group_dimension_allen
-                #     },
-                # ],
-                Dimensions=[
-                    {
-                        'Name': 'TargetGroup',
-                        'Value': config.target_group_dimension
-                    },
-                ],
-                StartTime=datetime.utcnow() - timedelta(seconds=start * 60),
-                EndTime=datetime.utcnow() - timedelta(seconds=end * 60),
-                Period=30,
-                Statistics=['Sum']
-            )
-            start -= 1
-            end -= 1
-            http_count = 0  # Initialize HTTP request of each 1 min
-            for data in HTTP['Datapoints']:
-                http_count = int(data['Sum'])  # Save the count number as an integer
-            http_rate.append(http_count)
+        time_point = datetime.utcnow()
+        time_period = 30  # data for 30 minutes
 
-            x_axis = list(range(1, 31))
+        http_rate = []  # A list to store HTTP request rate in past 30 min
+        HTTP = self.cloudwatch.get_metric_statistics(
+            Namespace='AWS/ApplicationELB',
+            MetricName='RequestCountPerTarget',
+            Dimensions=[
+                {
+                    'Name': 'TargetGroup',
+                    'Value': config.target_group_dimension
+                },
+            ],
+            StartTime=datetime.utcnow() - timedelta(seconds=time_period * 60),
+            EndTime=time_point,
+            Period=60,
+            Statistics=['Sum']
+        )
+        for data_point in HTTP['Datapoints']:
+            http_rate.append(int(data_point['Sum']))
+        x_axis = list(range(0, len(http_rate)))
+
         return x_axis, http_rate
 
     # Count the number of workers in past 30 minutes
     def number_workers(self):
-        ec2 = boto3.resource('ec2')
-        watch = boto3.client('cloudwatch')
-
-        start = 31
-        end = 30  # fist time interval is 31 to 30
+        # print('awsManager: getting the worker number history.')
+        time_point = datetime.utcnow()
+        time_period = 30 # data for 30 minutes
         inst_num = []  # A list to store number of workers in past 30 min
 
-        for times in range(0, 30):
-            inst_number = watch.get_metric_statistics(
-                Namespace='AWS/ApplicationELB',
-                MetricName='HealthyHostCount',
-                # Dimensions=[
-                #     {
-                #         'Name': 'TargetGroup',
-                #         'Value': config.target_group_dimension_allen
-                #     },
-                #     {
-                #         'Name': 'LoadBalancer',
-                #         'Value': config.ELB_dimension_allen  # view metrics -> source
-                #     }
-                # ],
-                Dimensions=[
-                    {
-                        'Name': 'TargetGroup',
-                        'Value': config.target_group_dimension
-                    },
-                    {
-                        'Name': 'LoadBalancer',
-                        'Value': config.ELB_dimension
-                    }
-                ],
-                StartTime=datetime.utcnow() - timedelta(seconds=start * 60),
-                EndTime=datetime.utcnow() - timedelta(seconds=end * 60),
-                Period=60,
-                Statistics=['Average']
+        inst_number = self.cloudwatch.get_metric_statistics(
+            Namespace='AWS/ApplicationELB',
+            MetricName='HealthyHostCount',
+            Dimensions=[
+                {
+                    'Name': 'TargetGroup',
+                    'Value': config.target_group_dimension
+                },
+                {
+                    'Name': 'LoadBalancer',
+                    'Value': config.ELB_dimension
+                }
+            ],
+            StartTime=time_point - timedelta(seconds=time_period * 60),
+            EndTime=time_point,
+            Period=60,
+            Statistics=['Average']
             )
-            for data in inst_number['Datapoints']:
-                inst_count = int(data['Average'])  # Save the count number as an integer
-                inst_num.append(inst_count)
-
-            start -= 1
-            end -= 1
+        # Save the count number into inst_num as an integer
+        for data_point in inst_number['Datapoints']:
+            inst_num.append(int(data_point['Average']))
 
         x_axis = list(range(0, len(inst_num)))
+
+        # print('X test', x_axis)
+        # print('Y test', inst_num)
+        # print('awsManager: worker number history complete.')
 
         return x_axis, inst_num
 
     # Create a ec2 instance
     def create_new_instance(self):
         try:
+
             response = self.ec2.create_instances(
                 # ImageId=config.image_id,
                 # MinCount=1,
@@ -236,7 +211,6 @@ class Manager:
                       'Values': [config.ImageId]}
                      ]
         )
-
         return responses
 
     # Register an ec2 instance to destinated target group
@@ -275,6 +249,7 @@ class Manager:
                 },
             ]
         )
+
         print("Removing an instance")
         print(response)
 
@@ -370,8 +345,6 @@ class Manager:
             return True
 
 
-
-
     # Increase worker based on ratio
     def increase_worker(self, ratio, num_instance, max_instance):
         num_increase = int(num_instance * ratio - num_instance)
@@ -388,14 +361,16 @@ class Manager:
     def decrease_worker(self, ratio, instance_ids, num_instance, min_instance):
         num_decrease = int(num_instance - num_instance * ratio)
         if num_decrease < 0:
+
             print("Cannot decrease worker")
             return
 
         if num_instance - num_decrease < min_instance:
             num_decrease = num_instance - min_instance
-
         remove_id = instance_ids[:num_decrease]
+
         print("remove ids are ", remove_id)
+
         for id in remove_id:
             self.remove_instance(id)
 

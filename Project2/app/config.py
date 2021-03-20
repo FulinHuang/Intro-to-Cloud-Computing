@@ -69,6 +69,7 @@ tag_specifications_allen = [{
 # --//
 # '''
 
+
 #YW
 # balancer
 arn = 'arn:aws:elasticloadbalancing:us-east-1:489711376857:loadbalancer/app/a2LoadBalancer/2fdf1cd188e91767'
@@ -77,21 +78,22 @@ target_arn = 'arn:aws:elasticloadbalancing:us-east-1:489711376857:targetgroup/wo
 target_group_dimension = 'targetgroup/workerpool5000/2a590f2f6b003750'
 ELB_dimension = 'app/a2LoadBalancer/2fdf1cd188e91767'
 
+
 # S3
 s3_name = 'ece1779yw'
 
 # Variable for creating an instance
-ImageId = 'ami-0cf5fc8b139494295'
+ImageId = 'ami-0cf5fc8b139494295' # worker creation
 KeyName = 'ece1779a1aij'
 user_tag = 'user'
-user_placement = 'a2user'
+user_placement = 'a2user' # worker list filter, user creation
 
 manager_tag = 'manager'
 manager_instance = 'ami-0cf5fc8b139494295'
 
 tag_specificatios = [{
-   'ResourceType': 'instance',
-   'Tags': [{'Key': 'Name', 'Value': user_tag}]}]
+	'ResourceType': 'instance',
+	'Tags': [{'Key': 'Name', 'Value': user_tag}]}]
 placement = {'AvailabilityZone': 'us-east-1f', 'GroupName': user_placement}
 security_group_Irene = 'launch-wizard-3'
 iam_instance_profile = {'Arn': 'arn:aws:iam::489711376857:instance-profile/S3_RDS_FULL'}

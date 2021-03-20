@@ -5,6 +5,7 @@ from sqlalchemy import desc
 import schedule
 from datetime import datetime
 
+
 manager = awsManager.Manager()
 
 def get_data():
@@ -25,6 +26,7 @@ def auto_scaler():
         instance_ids.append(instance.id)
 
     num_instance = len(instance_ids)
+
 
     valid = manager.valid_for_autoscale()
     print(valid)
@@ -54,5 +56,6 @@ def auto_scaler():
     else:
         print(datetime.now(), " There are some pending or unhealthy instances."
                               " Autoscaler does not increase/decrease worker at this time")
+
 
 

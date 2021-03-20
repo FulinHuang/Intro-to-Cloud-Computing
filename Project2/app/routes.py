@@ -190,6 +190,7 @@ def db_init():
         db_value = AutoScaleDB(
             cpu_max=80,
             cpu_min=10,
+
             ratio_expand=2,
             ratio_shrink=0.5,
             timestamp=datetime.now())
@@ -199,7 +200,6 @@ def db_init():
 
     scheduler.add_job(auto_scaler.auto_scaler, trigger='interval', minutes=1, max_instances=60)
     scheduler.start()
-
 
 # Manually set the threshold and ratio for auto scaling, and save in database
 @app.route("/auto_scale_input", methods=['GET', 'POST'])
