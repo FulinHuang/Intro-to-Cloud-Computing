@@ -27,7 +27,7 @@ class Config(object):
     BUCKET_NAME = 'ece1779yw'
     BUCKET_UPLOAD_FOLDER = 'image'
     BUCKET_OUTPUT_FOLDER = 'output'
-
+    BUCKET_THUMBNAILS_FOLDER = 'thumbnails'
     # photo access (AWS S3)
     BUCKET_ADDRESS = 'https://ece1779yw.s3.amazonaws.com/'
 

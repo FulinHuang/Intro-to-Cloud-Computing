@@ -318,7 +318,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Project2(userapp)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -422,7 +422,7 @@
       <updated>1614968347848</updated>
       <workItem from="1616108339247" duration="77000" />
       <workItem from="1616108723226" duration="9718000" />
-      <workItem from="1616131158739" duration="10821000" />
+      <workItem from="1616131158739" duration="15024000" />
     </task>
     <servers />
   </component>
