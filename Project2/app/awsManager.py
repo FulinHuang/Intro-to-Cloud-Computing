@@ -36,7 +36,6 @@ class Manager:
         )
         # sort the data points in timely order.
         all_points = sorted(CPU['Datapoints'], key=lambda k: k.get('Timestamp'), reverse=False)
-        print(all_points)
 
         # Save the count number into inst_num as an integer
         for data_point in all_points:
@@ -85,25 +84,32 @@ class Manager:
         time_period = 30
 
         http_rate = []
+        time_stamps = []
+
         HTTP = self.cloudwatch.get_metric_statistics(
-            Namespace='AWS/ApplicationELB',
-            MetricName='RequestCountPerTarget',
+            Namespace='Custom',
+            MetricName='HTTP_COUNT_5000',
             Dimensions=[
                 {
-                    'Name': 'TargetGroup',
-                    'Value': config.target_group_dimension
+                    'Name': 'Instance',
+                    'Value': inst_id
                 },
             ],
             StartTime=datetime.utcnow() - timedelta(seconds=time_period * 60),
             EndTime=time_point,
             Period=60,
-            Statistics=['Sum']
+            Statistics=['Maximum']
         )
-        for data_point in HTTP['Datapoints']:
-            http_rate.append(int(data_point['Sum']))
-        x_axis = list(range(0, len(http_rate)))
 
-        return x_axis, http_rate
+        all_points = sorted(HTTP['Datapoints'], key=lambda k: k.get('Timestamp'), reverse=False)
+
+        for data_point in all_points:
+            http_rate.append(int(data_point['Maximum']))
+            time_stamps.append(data_point['Timestamp']-timedelta(hours=4))
+
+        #x_axis = list(range(0, len(http_rate)))
+
+        return time_stamps, http_rate
 
     # Calculate the number of workers in past 30 minutes
     def number_workers(self):

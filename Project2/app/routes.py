@@ -74,10 +74,16 @@ def view(instance_id):
     buffer = b''.join(buf_CPU)
     b2 = base64.b64encode(buffer)
     CPU_img = b2.decode('utf-8')
+
     # plot for HTTP REQ
-    plt.plot(list_time, http_list, 'k', marker='+')
+    formatter = DateFormatter('%H:%M') # example '%Y-%m-%d %H:%M:%S'
+    fig, ax = plt.subplots()
+    plt.plot_date(list_time, http_list , marker='*', linestyle='-')
+    #plt.plot(list_time, http_list, 'k', marker='+')
     plt.xlabel('Time (minutes)', fontsize=10)
     plt.ylabel('Http request(Count)', fontsize=10)
+    ax.xaxis.set_major_formatter(formatter)
+    ax.set_xlim([datetime.utcnow() - timedelta(hours=4.6), datetime.utcnow() - timedelta(hours=4)])
     buf_HTTP = io.BytesIO()
     plt.savefig(buf_HTTP, format='png')
     plt.close()
