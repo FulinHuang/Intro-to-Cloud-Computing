@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, url_for, redirect, request
+from flask import render_template, url_for, redirect, request, flash
 from app import app, db
 from app.user import User
 from app.photo import Photo
@@ -26,22 +26,21 @@ scheduler.daemonic = False
 atexit.register(lambda: scheduler.shutdown())
 
 
-
-# Home page
+# Home page of manager app
 @app.route('/')
 @app.route('/home')
 def home():
-    plt.switch_backend('agg') #Allen - resolve plt runtime error
+    plt.switch_backend('agg')  # Yalun - resolve plt runtime error
     x_axis, inst_num = awsmanager.number_workers()
 
-    #create the plot
-    formatter = DateFormatter('%H:%M') # example '%Y-%m-%d %H:%M:%S'
+    # create the plot
+    formatter = DateFormatter('%H:%M')  # example '%Y-%m-%d %H:%M:%S'
     fig, ax = plt.subplots()
     plt.plot_date(x_axis, inst_num, marker='*', linestyle='-')
     plt.xlabel('Time', fontsize=10)
     plt.ylabel('Instance number', fontsize=10)
     ax.xaxis.set_major_formatter(formatter)
-    ax.set_xlim([datetime.utcnow() - timedelta(hours=4.6), datetime.utcnow()- timedelta(hours=4)])
+    ax.set_xlim([datetime.utcnow() - timedelta(hours=4.6), datetime.utcnow() - timedelta(hours=4)])
     buf = io.BytesIO()
     plt.savefig(buf, format='png')
     plt.close()
@@ -52,17 +51,17 @@ def home():
     return render_template('home.html', instance_num=instance_num_image)
 
 
-# Plot the CPU utilization and HTTP request for each running instance
+# Function to plot CPU utilization & HTTP request of running instance
 @app.route('/<instance_id>', methods=['GET', 'POST'])
 def view(instance_id):
-    plt.switch_backend('agg') #Allen - resolve plt runtime error
+    plt.switch_backend('agg')  # Allen - resolve plt runtime error
     time_list, cpu_list = awsmanager.inst_CPU(instance_id)
     list_time, http_list = awsmanager.inst_HTTP(instance_id)
+    print("AAAA",http_list)
     # plot for CPU UTIL
-    formatter = DateFormatter('%H:%M') # example '%Y-%m-%d %H:%M:%S'
+    formatter = DateFormatter('%H:%M')  # example '%Y-%m-%d %H:%M:%S'
     fig, ax = plt.subplots()
-    plt.plot_date(time_list, cpu_list, marker='*', linestyle='-')
-    #plt.plot(time_list, cpu_list, 'k', marker='+')
+    plt.plot_date(time_list, cpu_list, 'k', marker='*', linestyle='-')
     plt.xlabel('Time', fontsize=10)
     plt.ylabel('CPU utilization (%)', fontsize=10)
     ax.xaxis.set_major_formatter(formatter)
@@ -76,11 +75,10 @@ def view(instance_id):
     CPU_img = b2.decode('utf-8')
 
     # plot for HTTP REQ
-    formatter = DateFormatter('%H:%M') # example '%Y-%m-%d %H:%M:%S'
+    formatter = DateFormatter('%H:%M')  # example '%Y-%m-%d %H:%M:%S'
     fig, ax = plt.subplots()
-    plt.plot_date(list_time, http_list , marker='*', linestyle='-')
-    #plt.plot(list_time, http_list, 'k', marker='+')
-    plt.xlabel('Time (minutes)', fontsize=10)
+    plt.plot_date(list_time, http_list, 'k', marker='*', linestyle='-')
+    plt.xlabel('Time', fontsize=10)
     plt.ylabel('Http request(Count)', fontsize=10)
     ax.xaxis.set_major_formatter(formatter)
     ax.set_xlim([datetime.utcnow() - timedelta(hours=4.6), datetime.utcnow() - timedelta(hours=4)])
@@ -95,21 +93,21 @@ def view(instance_id):
     return render_template('workers.html', instance_id=instance_id, CPU_img=CPU_img, HTTP_img=HTTP_img)
 
 
-# Display a list of workers & detail info
+# Display a list of workers & detail information
 @app.route('/worker_list')
 def worker_list():
     instance = awsmanager.get_user_instances('running')
     return render_template('worker_list.html', instance_list=instance)
 
 
-# A page for user to increase or decrease a worker
+# The page to increase or decrease a worker
 @app.route('/worker_control')
 def worker_control():
     title = 'Worker Control'
     return render_template('worker_control.html', title=title)
 
 
-# Increase a worker
+# Increase one worker
 @app.route('/increase_workers', methods=['GET', 'POST'])
 def increase_workers():
     running_ids = []
@@ -127,12 +125,13 @@ def increase_workers():
 
     if num_instance < max_instance:
         awsmanager.create_new_instance()
+        return render_template("increased.html")
     else:
         print('Full work load!')
     return redirect(url_for('worker_control'))
 
 
-# Decrease a worker
+# Decrease one worker
 @app.route('/decrease_workers', methods=['GET', 'POST'])
 def decrease_workers():
     instance_ids = []
@@ -144,6 +143,7 @@ def decrease_workers():
 
     if num_instance > min_instance:
         awsmanager.remove_instance(instance_ids[0])
+        return render_template("decreased.html")
     else:
         print("Cannot remove: min work load")
         instances_new = awsmanager.get_user_instances('running')
@@ -155,8 +155,7 @@ def decrease_workers():
     return redirect(url_for('worker_control'))
 
 
-
-# A page for user to add customized values to the auto scaler
+# The page to add customized values to the auto scaler
 @app.route("/auto_scale_input", methods=['GET', 'POST'])
 def auto_scale_input():
     if request.method == 'POST':
@@ -177,14 +176,15 @@ def auto_scale_input():
     else:
         return render_template("auto_scale_input.html")
 
-# A page to display the DNS link
+
+# The page to display the DNS link
 @app.route('/DNSloadbalancer')
 def DNSloadbalancer():
     print('The DNS name of the load balancer is displayed...')
     return render_template("DNSloadbalancer.html")
 
 
-# Terminate workers and stop manager
+# The page to terminate all worker instances and stop the manager
 @app.route('/stop_terminate')
 def stop_terminate():
     # Stop scheduling
@@ -193,14 +193,14 @@ def stop_terminate():
 
     # Terminate worker and stop manager
     awsmanager.terminate_all()
-    print('The manager instance has stopped.')
+    print('The manager instance has been stopped.')
 
     return render_template("terminate_all.html")
 
-# Delete all data
+
+# The page to delete all data in RDS and S3
 @app.route('/delete_data')
 def remove_all_data():
-
     s3_resource = boto3.resource('s3')
     bucket = s3_resource.Bucket(config.s3_name)
     bucket.objects.all().delete()
@@ -213,10 +213,10 @@ def remove_all_data():
     return render_template("delete_data.html")
 
 
-# Check the # workers before launching the website
+# Check the number of workers before launching the app
 @app.before_first_request
 def auto_check():
-    print('Initializing')
+    print('Initializing...')
 
     instances = awsmanager.get_user_instances('running')
     inst_id = []
@@ -226,9 +226,8 @@ def auto_check():
 
     print("There are ", len(inst_id), " running instances")
 
-
     if len(inst_id) == 0:
-        print(datetime.now(), 'No running instances exist, we are create an instance...')
+        print(datetime.now(), 'No running instances exist, we are creating an instance...')
         awsmanager.create_new_instance()
 
     elif len(inst_id) > 1:
@@ -239,7 +238,6 @@ def auto_check():
 
     else:
         print(datetime.now(), 'Our worker pool has 1 instance running currently, initiating done.')
-
 
     # Initialize the database & start auto-scaler before launching the website
     value = AutoScaleDB.query.order_by(desc(AutoScaleDB.id)).first()

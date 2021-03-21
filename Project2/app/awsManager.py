@@ -3,6 +3,8 @@ from app import config
 from botocore.exceptions import ClientError
 from datetime import datetime, timedelta
 import time
+from flask import flash
+
 
 class Manager:
 
@@ -12,7 +14,7 @@ class Manager:
         self.cloudwatch = boto3.client('cloudwatch')
         self.s3 = boto3.resource('s3')
 
-    # Calculate CPU utilization for all workers in past 30 min
+    # Calculate the CPU utilization for all workers in past 30 minutes
     def inst_CPU(self, inst_id):
         instance = self.ec2.Instance(inst_id)  # Identify the instance by ID
 
@@ -40,12 +42,11 @@ class Manager:
         # Save the count number into inst_num as an integer
         for data_point in all_points:
             CPU_utl.append(round(data_point['Average'], 2))
-            time_stamps.append(data_point['Timestamp']-timedelta(hours=4))
+            time_stamps.append(data_point['Timestamp'] - timedelta(hours=4))
 
         return time_stamps, CPU_utl
 
-
-    # Calcuate avg cpu for all workers over past 2 minutes
+    # Calcuate the avg cpu for all workers over past 2 minutes
     def avg_cpu(self, instances):
         cpu = []
         for instance in instances:
@@ -77,7 +78,7 @@ class Manager:
 
         return avg_cpu
 
-    # Calculate HTTP request rate for all workers in past 30 min
+    # Calculate the HTTP request rate for all workers in past 30 minutes
     def inst_HTTP(self, inst_id):
         ec2 = boto3.resource('ec2')
         time_point = datetime.utcnow()
@@ -86,6 +87,7 @@ class Manager:
         http_rate = []
         time_stamps = []
 
+        # Implement with the new custom metric
         HTTP = self.cloudwatch.get_metric_statistics(
             Namespace='Custom',
             MetricName='HTTP_COUNT_5000',
@@ -104,10 +106,8 @@ class Manager:
         all_points = sorted(HTTP['Datapoints'], key=lambda k: k.get('Timestamp'), reverse=False)
 
         for data_point in all_points:
-            http_rate.append(int(data_point['Maximum']))
-            time_stamps.append(data_point['Timestamp']-timedelta(hours=4))
-
-        #x_axis = list(range(0, len(http_rate)))
+            http_rate.append(int(data_point['Maximum'])) ## NEED FIXME
+            time_stamps.append(data_point['Timestamp'] - timedelta(hours=4))
 
         return time_stamps, http_rate
 
@@ -135,17 +135,17 @@ class Manager:
             EndTime=time_point,
             Period=60,
             Statistics=['Average'],
-            )
+        )
         # sort the data points in timely order.
         all_points = sorted(inst_number['Datapoints'], key=lambda k: k.get('Timestamp'), reverse=False)
         # Save the count number into inst_num as an integer
         for data_point in all_points:
             inst_num.append(int(data_point['Average']))
-            time_stamps.append(data_point['Timestamp']-timedelta(hours=4))
+            time_stamps.append(data_point['Timestamp'] - timedelta(hours=4))
 
         return time_stamps, inst_num
 
-    # Create a ec2 instance
+    # Create a new ec2 instance
     def create_new_instance(self):
         try:
 
@@ -165,7 +165,7 @@ class Manager:
             )
             new_instance = response[0]
 
-            print(datetime.now(),' Adding new instance ', new_instance, '...')
+            print(datetime.now(), ' Adding new instance ', new_instance, '...')
             # Wait for state to change before register it to a target group
             new_instance.wait_until_running(
                 Filters=[
@@ -199,7 +199,7 @@ class Manager:
         # Look for all user instances that satisfy the conditions
         responses = self.ec2.instances.filter(
             Filters=[{'Name': 'placement-group-name',
-                      'Values': [config.user_placement] # worker group
+                      'Values': [config.user_placement]  # worker group
                       },
                      {
                          'Name': 'instance-state-name',
@@ -245,7 +245,7 @@ class Manager:
 
         # Terminate instance by instanceId
         self.ec2.instances.filter(InstanceIds=[instanceId]).terminate()
-        print(datetime.now(), " Instance i " + instanceId + " is terminated")
+        print(datetime.now(), " Instance id " + instanceId + " is terminated")
 
         time.sleep(20)
 
@@ -258,7 +258,7 @@ class Manager:
     # Unregister an instance from the target group
     def unregister_from_target_group(self, instanceId):
 
-        # Wait for deregister
+        # Wait for de-register
         waiter = self.elb.get_waiter('target_deregistered')
         waiter.wait(
             TargetGroupArn=config.target_arn,
@@ -300,7 +300,7 @@ class Manager:
         return healthy_ids, running_ids
 
     def valid_for_autoscale(self):
-        healthy_ids, running_ids  = self.get_healthy_ids()
+        healthy_ids, running_ids = self.get_healthy_ids()
         pending_ids = []
         stopping_ids = []
         pending_instances = self.get_user_instances('pending')
@@ -321,8 +321,7 @@ class Manager:
         else:
             return True
 
-
-    # Increase worker based on ratio
+    # Increase workers based on ratio
     def increase_worker(self, ratio, num_instance, max_instance):
         num_increase = int(num_instance * ratio - num_instance)
         if num_increase < 0:
@@ -335,7 +334,7 @@ class Manager:
         for i in range(num_increase):
             self.create_new_instance()
 
-    # Decrase worker by ratio
+    # Decrease workers by ratio
     def decrease_worker(self, ratio, instance_ids, num_instance, min_instance):
         num_decrease = int(num_instance - num_instance * ratio)
         if num_decrease < 0:
@@ -352,9 +351,8 @@ class Manager:
         for id in remove_id:
             self.remove_instance(id)
 
-
+    # Stop all workers
     def terminate_all(self):
-        # Stop all workers
         instances = self.get_user_instances('running')
         inst_id = []
         for instance in instances:
@@ -366,11 +364,7 @@ class Manager:
             self.remove_instance(id)
             print('This worker instance: {} has been removed successfully.'.format(id))
 
-        # Stop manager
+        # Stop the manager
         manager_instance = self.ec2.instances.filter(InstanceIds=[config.manager_instance])
         manager_instance.stop()
         print(datetime.now(), " Manager is stopped")
-
-
-
-
