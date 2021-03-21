@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="beb9d699-2eff-4f5e-9096-8f1fffb3fe2b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/auto_scaler.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/auto_scaler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/awsManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/awsManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/manager.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,7 +14,8 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Project2$run.coverage" NAME="run Coverage Results" MODIFIED="1615610736986" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Project2$Project2.coverage" NAME="Project2 Coverage Results" MODIFIED="1616280640003" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Project2$Project2.coverage" NAME="Project2 Coverage Results" MODIFIED="1616284577003" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Project2$auto_scaler.coverage" NAME="auto_scaler Coverage Results" MODIFIED="1616284571656" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-1488573748">
@@ -54,13 +54,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="14" />
-          <entry key="py" value="6807" />
+          <entry key="py" value="6923" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="14" />
-          <entry key="Python" value="6807" />
+          <entry key="Python" value="6923" />
         </counts>
       </usages-collector>
     </session>
@@ -70,10 +70,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/auto_scaler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="165">
+              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
+                <marker date="1616284571648" expanded="true" signature="361:364" ph="..." />
               </folding>
             </state>
           </provider>
@@ -82,8 +83,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/awsManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+            <state relative-caret-position="-343">
+              <caret line="9" column="23" lean-forward="true" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -91,14 +92,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/routes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1054">
-              <caret line="149" lean-forward="true" selection-start-line="149" selection-end-line="149" />
+            <state relative-caret-position="346">
+              <caret line="251" column="21" lean-forward="true" selection-start-line="251" selection-start-column="21" selection-end-line="251" selection-end-column="21" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
-                <marker date="1616279394236" expanded="true" signature="5053:5054" ph="..." />
+                <marker date="1616284465290" expanded="true" signature="4981:4982" ph="..." />
               </folding>
             </state>
           </provider>
@@ -127,8 +128,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="45">
+              <caret line="3" column="11" lean-forward="true" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -145,7 +146,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/config.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-686">
@@ -235,10 +236,10 @@
         <option value="$PROJECT_DIR$/app/user.py" />
         <option value="$PROJECT_DIR$/app/templates/DNSloadbalancer.html" />
         <option value="$PROJECT_DIR$/app/config.py" />
-        <option value="$PROJECT_DIR$/app/auto_scaler.py" />
-        <option value="$PROJECT_DIR$/app/routes.py" />
         <option value="$PROJECT_DIR$/app/__init__.py" />
         <option value="$PROJECT_DIR$/app/awsManager.py" />
+        <option value="$PROJECT_DIR$/app/routes.py" />
+        <option value="$PROJECT_DIR$/app/auto_scaler.py" />
       </list>
     </option>
   </component>
@@ -378,6 +379,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="auto_scaler" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Project2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="aws_access_key_id" value="ASIAQFKPZRANMODSD6E4" />
+        <env name="aws_secret_access_key" value="WB96M253P1s2EfQipkyuzWNMQXZPN7al0c5xsxXo" />
+        <env name="aws_session_token" value="FwoGZXIvYXdzEGcaDMRTNqzpwGki9/OeYCLLAUXzST3L/sDtXMRZIpPr79iA0sAXCd5lxm5xdXMg69TiEiUoN+Z59zwRI4em4rBalbcHREyYXkxPBGdmg02lgomjUoihGyDlehCnjmXbUtHqfVRcgraU2ndeslMORf8/djdG3LrqzDJWkB1MhoFDBU82o9M5DtjvYKZcOvIvHGuCqdFL66tjA6u/hMh3f0ikjXTnA0Z4VszDeABlC2QBj2Kcb7nkJSnmu6u1XrN0E0Z0wAO8T9zGoUx008io/7FIUVhT97B5J9vhb2QuKPH6pIIGMi0iwcHP8xfHMGFjo1CtCYYEx947DMMmp9HHRnarPQDwid5Y3nWi0Mvvz7ZW+w0=" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Allen\AppData\Local\Microsoft\WindowsApps\python3.9.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/app" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app/auto_scaler.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="run" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -418,7 +444,13 @@
     <list>
       <item itemvalue="Flask server.Project2" />
       <item itemvalue="Python.run" />
+      <item itemvalue="Python.auto_scaler" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.auto_scaler" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" BundledDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
@@ -450,12 +482,12 @@
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="722" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4975728" visible="true" weight="0.3101777" />
-      <window_info id="Structure" order="1" sideWeight="0.50242716" side_tool="true" weight="0.30533117" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4946695" visible="true" weight="0.3101777" />
+      <window_info id="Structure" order="1" sideWeight="0.5053305" side_tool="true" weight="0.3101777" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32857144" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49919224" weight="0.33492064" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49919224" visible="true" weight="0.25555557" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -464,7 +496,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32857144" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50080776" side_tool="true" weight="0.32857144" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49919224" visible="true" weight="0.32539684" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49919224" weight="0.36984128" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49919224" weight="0.32857144" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -633,51 +665,52 @@
     <entry file="file://$PROJECT_DIR$/app/templates/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes.py">
+    <entry file="file://$PROJECT_DIR$/app/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1054">
-          <caret line="149" lean-forward="true" selection-start-line="149" selection-end-line="149" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-            <marker date="1616279394236" expanded="true" signature="5053:5054" ph="..." />
-          </folding>
+        <state relative-caret-position="-686">
+          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="45">
+          <caret line="3" column="11" lean-forward="true" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/awsManager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/auto_scaler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="165">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
+            <marker date="1616284571648" expanded="true" signature="361:364" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config.py">
+    <entry file="file://$PROJECT_DIR$/app/awsManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-686">
-          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+        <state relative-caret-position="-343">
+          <caret line="9" column="23" lean-forward="true" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="251" column="21" lean-forward="true" selection-start-line="251" selection-start-column="21" selection-end-line="251" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+            <marker date="1616284465290" expanded="true" signature="4981:4982" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

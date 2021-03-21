@@ -1,8 +1,6 @@
 from app import app, db
 from app.AutoScaleDB import AutoScaleDB
 from app import awsManager 
-from sqlalchemy import desc
-import schedule
 from datetime import datetime
 
 
@@ -57,6 +55,4 @@ def auto_scaler():
     else:
         print(datetime.now(), " There are some pending or unhealthy instances."
                               " Autoscaler does not increase/decrease worker at this time")
-
-
 
