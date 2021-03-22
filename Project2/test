@@ -1,0 +1,1 @@
+python3 gen.py http://allena2ELB-168220349.us-east-1.elb.amazonaws.com/api/upload admin admin 2  /home/ubuntu/Desktop/ECE1779_A2_Mar22/Intro-to-Cloud-Computing/Project1/app/static/image 1000

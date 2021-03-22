@@ -1,0 +1,22 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Upload URL Photo</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.photoURL.label }}<br>
+            {{ form.photoURL(size=140) }}<br>
+            {% for error in form.photoURL.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+
+        <p>{{ form.submit() }}</p>
+
+    </form>
+    <p>
+            <a href="{{ url_for('index') }}">Return</a>
+    </p>
+{% endblock %}
