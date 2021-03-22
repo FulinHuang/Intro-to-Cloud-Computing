@@ -108,6 +108,7 @@ class Manager:
         for data_point in all_points:
             http_rate.append(int(data_point['Maximum'])) ## NEED FIXME
             time_stamps.append(data_point['Timestamp'] - timedelta(hours=4))
+        http_rate = [max(0, (2*x-8)) for x in http_rate]   	    
 
         return time_stamps, http_rate
 
@@ -364,6 +365,7 @@ class Manager:
             self.remove_instance(id)
             print('This worker instance: {} has been removed successfully.'.format(id))
 
+        print('This manager instance is being stopped...')
         # Stop the manager
         manager_instance = self.ec2.instances.filter(InstanceIds=[config.manager_instance])
         manager_instance.stop()

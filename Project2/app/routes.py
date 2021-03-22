@@ -57,7 +57,6 @@ def view(instance_id):
     plt.switch_backend('agg')  # Allen - resolve plt runtime error
     time_list, cpu_list = awsmanager.inst_CPU(instance_id)
     list_time, http_list = awsmanager.inst_HTTP(instance_id)
-    print("AAAA",http_list)
     # plot for CPU UTIL
     formatter = DateFormatter('%H:%M')  # example '%Y-%m-%d %H:%M:%S'
     fig, ax = plt.subplots()
@@ -164,6 +163,12 @@ def auto_scale_input():
         ratio_expand = request.form['ratio_expand']
         ratio_shrink = request.form['ratio_shrink']
 
+        if threshold_max is None or threshold_max == '' or float(threshold_max) <= 0 or \
+           threshold_min is None or threshold_min == '' or float(threshold_min) <= 0 or \
+           ratio_expand is None or ratio_expand == '' or float(ratio_expand) <= 0 or \
+           ratio_shrink is None or ratio_shrink == '' or float(ratio_shrink) <= 0:
+           return render_template("auto_scale_error.html")
+
         u1 = AutoScaleDB(cpu_max=threshold_max,
                          cpu_min=threshold_min,
                          ratio_expand=ratio_expand,
@@ -187,17 +192,17 @@ def DNSloadbalancer():
 # The page to terminate all worker instances and stop the manager
 @app.route('/stop_terminate')
 def stop_terminate():
+
     # Stop scheduling
     jobs = scheduler.get_jobs()
     jobs[0].remove()
-
+	
     # Terminate worker and stop manager
     awsmanager.terminate_all()
     print('The manager instance has been stopped.')
 
     return render_template("terminate_all.html")
-
-
+	
 # The page to delete all data in RDS and S3
 @app.route('/delete_data')
 def remove_all_data():

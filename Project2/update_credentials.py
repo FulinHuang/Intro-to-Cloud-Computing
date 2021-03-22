@@ -8,7 +8,7 @@ output_name = "credentials"
 #with open ('metadata.json') as json_file:
 #    data = json.load(json_file)
 
-r = requests.get('http://169.254.169.254/latest/meta-data/iam/security-credentials/Manager_Role_Allen')
+r = requests.get('http://169.254.169.254/latest/meta-data/iam/security-credentials/S3_RDS_FULL')
 data = r.json()
 
 access_key_id = data["AccessKeyId"]

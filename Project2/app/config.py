@@ -49,11 +49,11 @@
 
 # YW
 # balancer
-arn = 'arn:aws:elasticloadbalancing:us-east-1:489711376857:loadbalancer/app/a2LoadBalancer/2fdf1cd188e91767'
-dns = 'a2LoadBalancer-472858139.us-east-1.elb.amazonaws.com'
-target_arn = 'arn:aws:elasticloadbalancing:us-east-1:489711376857:targetgroup/workerpool5000/2a590f2f6b003750'
-target_group_dimension = 'targetgroup/workerpool5000/2a590f2f6b003750'
-ELB_dimension = 'app/a2LoadBalancer/2fdf1cd188e91767'
+arn = 'arn:aws:elasticloadbalancing:us-east-1:011441637402:targetgroup/allen0319/30a2474bf44efd6e'
+dns = 'allena2ELB-168220349.us-east-1.elb.amazonaws.com'
+target_arn = 'arn:aws:elasticloadbalancing:us-east-1:011441637402:targetgroup/allen0319/30a2474bf44efd6e'
+target_group_dimension = 'targetgroup/allen0319/30a2474bf44efd6e'
+ELB_dimension = 'app/allena2ELB/5360f782e6428bc4'
 
 # S3
 s3_name = 'ece1779yw'
@@ -61,17 +61,17 @@ s3_name = 'ece1779yw'
 # Variable for creating an instance
 
 ImageId = 'ami-0beea1581e235ccb8'  # 'ami-0cf5fc8b139494295' # worker creation
-KeyName = 'ece1779a1aij'
+KeyName = 'Allen_A2_User1'
 user_tag = 'user'
 user_placement = 'a2user'  # worker list filter, user creation
 manager_tag = 'manager'
-manager_instance = 'i-0ed93f5bec9b7e654'
+manager_instance = 'i-09ee913b4c04c4ce9'
 tag_specifications = [{
     'ResourceType': 'instance',
     'Tags': [{'Key': 'Name', 'Value': user_tag}]}]
 placement = {'AvailabilityZone': 'us-east-1f', 'GroupName': user_placement}
 security_group = 'launch-wizard-3'
-iam_instance_profile = {'Arn': 'arn:aws:iam::489711376857:instance-profile/S3_RDS_FULL'}
+iam_instance_profile = {'Arn': 'arn:aws:iam::011441637402:instance-profile/S3_RDS_FULL'}
 user_data = '''Content-Type: multipart/mixed; boundary="//"
 MIME-Version: 1.0
 

@@ -7,9 +7,34 @@ from datetime import datetime
 manager = awsManager.Manager()
 
 def get_data():
-    db.session.commit()  # update the database, otherwise we cannot get the latest value
-    autoDb = db.session.query(AutoScaleDB).order_by(AutoScaleDB.id.desc()).first()
-    return autoDb
+   db.session.commit()  # update the database, otherwise we cannot get the latest value
+   autoDb = db.session.query(AutoScaleDB).order_by(AutoScaleDB.id.desc()).first()
+   cpu_max = autoDb.cpu_max
+   cpu_min = autoDb.cpu_min
+   ratio_expand = autoDb.ratio_expand
+   ratio_shrink = autoDb.ratio_shrink
+
+   if cpu_max is None or cpu_max == '' or float(cpu_max) <= 0:
+       cpu_max = 80
+   if cpu_min is None or cpu_min == '' or float(cpu_min) <= 0:
+       cpu_min = 10
+   if ratio_expand is None or ratio_expand == '' or float(ratio_expand) <= 0:
+       ratio_expand = 2
+   if ratio_shrink is None or ratio_shrink == '' or float(ratio_shrink) <= 0:
+       ratio_shrink = 0.5
+
+   db_value = AutoScaleDB(
+       cpu_max=cpu_max,
+       cpu_min=cpu_min,
+       ratio_expand=ratio_expand,
+       ratio_shrink=ratio_shrink,
+       timestamp=datetime.now())
+   db.session.add(db_value)
+   db.session.commit()
+
+   autoDb = db.session.query(AutoScaleDB).order_by(AutoScaleDB.id.desc()).first()
+
+   return autoDb
 
 
 def auto_scaler():
