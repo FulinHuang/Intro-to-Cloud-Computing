@@ -6,9 +6,7 @@ class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'ece1779'
 
     # RDS database
-    # SQLALCHEMY_DATABASE_URI = 'mysql://ece1779:ece1779project1@ece1779-a1.cbqorhddlq5b.us-east-1.rds.amazonaws.com/ece1779a1'
-    # SQLALCHEMY_DATABASE_URI = 'mysql://allen_admin:lu19920218@allen-ece1779-a1.c7mezzt0p0rf.us-east-1.rds.amazonaws.com/dbname'
-    SQLALCHEMY_DATABASE_URI = 'mysql://admin:ece1779pass@database-ece1779.cpng8nm7nagd.us-east-1.rds.amazonaws.com/userapp'
+    SQLALCHEMY_DATABASE_URI = 'mysqlpath'
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     MAIL_SERVER = 'smtp.googlemail.com'
