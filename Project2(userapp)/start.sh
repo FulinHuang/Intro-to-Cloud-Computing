@@ -7,7 +7,7 @@ cd /home/ubuntu/Desktop/userapp2.0
 source venv/bin/activate
 
 #awscli configurations(no longer used)
-#curl https://169.254.169.254/latest/meta-data/iam/security-credentials/S3_RDS_FULL #> metadata.json
+#curl some path
 
 python update_credentials.py
 
